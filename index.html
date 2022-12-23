@@ -2,11 +2,15 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    </head>
+    <body>
         <style>
             .grid {
                 display: grid;
                 grid-template-columns: repeat(2, minmax(50px, 1fr));
                 grid-gap: 0.5rem;
+                margin-bottom: 1%;
             }
 
             .grid-item {
@@ -26,8 +30,9 @@
 
             @media screen and (min-width: 500px) {
                 .grid {
-                    grid-template-columns: repeat(6, minmax(220px, 1fr));
+                    grid-template-columns: repeat(4, minmax(220px, 1fr));
                     grid-gap: 0.5rem 0.5rem;
+                    margin-bottom: 1%;
                 }
                 .grid-span {
                     font-size: 5vw;
@@ -36,8 +41,174 @@
                 }
             }
         </style>
-    </head>
-    <body>
+        <style>
+            .keyword:first-child {
+                border-top: 1px solid black;
+            }
+
+            .keyword {
+                position: relative;
+                padding: 17px 0;
+                cursor: pointer;
+                border-bottom: 1px solid #dddddd;
+            }
+
+            .keyword::before {
+                display: inline-block;
+                content: 'Q';
+                color: #006633;
+                margin: 0 5px;
+            }
+
+            .keyword.on > span {
+                font-weight: bold;
+                color: #006633;
+            }
+
+            .content {
+                display: none;
+                overflow: hidden;
+                background-color: #f4f4f2;
+                padding: 27px 0;
+            }
+
+            .content::before {
+                display: inline-block;
+                font-weight: bold;
+                color: #666;
+                margin: 0 5px;
+            }
+
+            .arrow-wrap {
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translate(0, -50%);
+            }
+
+            .keyword .arrow-top {
+                display: none;
+            }
+            .keyword .arrow-bottom {
+                display: block;
+            }
+            .keyword.on .arrow-bottom {
+                display: none;
+            }
+            .keyword.on .arrow-top {
+                display: block;
+            }
+        </style>
+        <script>
+            function controlInfoBox(boxNum){
+                let boxId = "box"+boxNum;
+                let box = document.getElementById(boxId);
+                if(box.style.display=="none"){
+                    box.style.display="block";
+                }else{
+                    box.style.display="none";
+                }
+            }
+        </script>
+        
+        <div class="grid">
+            <div class="grid-item" style="background-color: #d50000; color: white;" 
+                 onclick="controlInfoBox(1)">
+                <div class="grid-title">
+                    캠퍼스맵(Test)
+                </div>
+                <h1 class="grid-span">🗺</h1>
+            </div>
+            <div class="grid-item" style="background-color: #d50000; color: white;">
+                <div class="grid-title">
+                    캠퍼스맵
+                </div>
+                <h1 class="grid-span">🗺</h1>
+            </div>
+            <div class="grid-item" style="background-color: #d50000; color: white;">
+                <div class="grid-title">
+                    캠퍼스맵
+                </div>
+                <h1 class="grid-span">🗺</h1>
+            </div>
+            <div class="grid-item" style="background-color: #d50000; color: white;">
+                <div class="grid-title">
+                    캠퍼스맵
+                </div>
+                <h1 class="grid-span">🗺</h1>
+            </div>
+        </div>
+        <div style="display:none;" id="box1">
+            <div id="Accordion_wrap">
+                <div class="keyword big-text">
+                    <span>장학금</span>
+                    <div class="arrow-wrap">
+                        <span class="arrow-top">↑</span>
+                        <span class="arrow-bottom">↓</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <div>
+                        <div>
+                            <img
+                                src="../resource/whole_map.png"
+                                class="rounded mx-auto d-block"
+                                alt="서강대학교 지도"
+                            />
+                        </div>
+                        <div>
+                            <span>학생 지원팀 관련 텍스트..</span>
+                        </div>
+                        <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                    </div>
+                </div>
+                <div class="keyword big-text">
+                    <span>글쓰기 튜터링</span>
+                    <div class="arrow-wrap">
+                        <span class="arrow-top">↑</span>
+                        <span class="arrow-bottom">↓</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <div>
+                        <div>
+                            <img
+                                src="../resource/whole_map.png"
+                                class="rounded mx-auto d-block"
+                                alt="서강대학교 지도"
+                            />
+                        </div>
+                        <div>
+                            <span>학생 지원팀 관련 텍스트..</span>
+                        </div>
+                        <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                    </div>
+                </div>
+                <div class="keyword big-text">
+                    <span>기타</span>
+                    <div class="arrow-wrap">
+                        <span class="arrow-top">↑</span>
+                        <span class="arrow-bottom">↓</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="container-sm">
+                        <div>
+                            <img
+                                src="../resource/whole_map.png"
+                                class="rounded mx-auto d-block"
+                                alt="서강대학교 지도"
+                            />
+                        </div>
+                        <div>
+                            <span>학생 지원팀 관련 텍스트..</span>
+                        </div>
+                        <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="grid">
             <div class="grid-item" style="background-color: #d50000; color: white;">
                 <div class="grid-title">
@@ -63,30 +234,8 @@
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
-                <div class="grid-title">
-                    캠퍼스맵
-                </div>
-                <h1 class="grid-span">🗺</h1>
-            </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
-                <div class="grid-title">
-                    캠퍼스맵
-                </div>
-                <h1 class="grid-span">🗺</h1>
-            </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
-                <div class="grid-title">
-                    캠퍼스맵
-                </div>
-                <h1 class="grid-span">🗺</h1>
-            </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
-                <div class="grid-title">
-                    캠퍼스맵
-                </div>
-                <h1 class="grid-span">🗺</h1>
-            </div>
+        </div>
+        <div class="grid">
             <div class="grid-item" style="background-color: #d50000; color: white;">
                 <div class="grid-title">
                     캠퍼스맵
@@ -112,5 +261,12 @@
                 <h1 class="grid-span">🗺</h1>
             </div>
         </div>
+        <script>
+            $('.keyword').click(function () {
+                $(this).next('.content').stop().slideToggle(300);
+                $(this).toggleClass('on').siblings().removeClass('on');
+                $(this).next('.content').siblings('.content').slideUp(300); // 1개씩 펼치기
+            });
+        </script>
     </body>
 </html>
