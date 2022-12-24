@@ -100,167 +100,996 @@
             }
         </style>
         <script>
-            function controlInfoBox(boxNum){
-                let boxId = "box"+boxNum;
+            function controlInfoBox(boxNum) {
+                let boxId = 'box' + boxNum;
                 let box = document.getElementById(boxId);
-                if(box.style.display=="none"){
-                    box.style.display="block";
-                }else{
-                    box.style.display="none";
-                }
+                $(box).siblings('.box').slideUp(200);
+                $(box).delay(200).slideToggle(400);
             }
         </script>
-        
+
         <div class="grid">
-            <div class="grid-item" style="background-color: #d50000; color: white;" 
-                 onclick="controlInfoBox(1)">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(1)"
+            >
                 <div class="grid-title">
                     캠퍼스맵(Test)
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(2)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(3)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(4)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
         </div>
-        <div style="display:none;" id="box1">
-            <div id="Accordion_wrap">
-                <div class="keyword big-text">
-                    <span>장학금</span>
-                    <div class="arrow-wrap">
-                        <span class="arrow-top">↑</span>
-                        <span class="arrow-bottom">↓</span>
+
+        <div class="largebox">
+            <div style="display: none;" id="box1" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
                     </div>
                 </div>
-                <div class="content">
-                    <div>
-                        <div>
-                            <img
-                                src="../resource/whole_map.png"
-                                class="rounded mx-auto d-block"
-                                alt="서강대학교 지도"
-                            />
+            </div>
+
+            <div style="display: none;" id="box2" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금2</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
                         </div>
+                    </div>
+                    <div class="content">
                         <div>
-                            <span>학생 지원팀 관련 텍스트..</span>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..2</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크2</a>
                         </div>
-                        <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링2</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..2</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크2</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타2</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..2</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크2</a>
+                        </div>
                     </div>
                 </div>
-                <div class="keyword big-text">
-                    <span>글쓰기 튜터링</span>
-                    <div class="arrow-wrap">
-                        <span class="arrow-top">↑</span>
-                        <span class="arrow-bottom">↓</span>
+            </div>
+
+            <div style="display: none;" id="box3" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금3</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링3</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타3</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
                     </div>
                 </div>
-                <div class="content">
-                    <div>
-                        <div>
-                            <img
-                                src="../resource/whole_map.png"
-                                class="rounded mx-auto d-block"
-                                alt="서강대학교 지도"
-                            />
+            </div>
+            <div style="display: none;" id="box4" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금4</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
                         </div>
-                        <div>
-                            <span>학생 지원팀 관련 텍스트..</span>
-                        </div>
-                        <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
                     </div>
-                </div>
-                <div class="keyword big-text">
-                    <span>기타</span>
-                    <div class="arrow-wrap">
-                        <span class="arrow-top">↑</span>
-                        <span class="arrow-bottom">↓</span>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
                     </div>
-                </div>
-                <div class="content">
-                    <div class="container-sm">
-                        <div>
-                            <img
-                                src="../resource/whole_map.png"
-                                class="rounded mx-auto d-block"
-                                alt="서강대학교 지도"
-                            />
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링4</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
                         </div>
+                    </div>
+                    <div class="content">
                         <div>
-                            <span>학생 지원팀 관련 텍스트..</span>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
                         </div>
-                        <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타4</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="grid">
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(5)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(6)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(7)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(8)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
         </div>
+        <div class="largebox">
+            <div style="display: none;" id="box5" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: none;" id="box6" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금2</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..2</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크2</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링2</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..2</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크2</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타2</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..2</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크2</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: none;" id="box7" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금3</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링3</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타3</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display: none;" id="box8" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금4</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링4</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타4</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="grid">
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(9)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(10)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(11)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
-            <div class="grid-item" style="background-color: #d50000; color: white;">
+            <div
+                class="grid-item"
+                style="background-color: #d50000; color: white;"
+                onclick="controlInfoBox(12)"
+            >
                 <div class="grid-title">
                     캠퍼스맵
                 </div>
                 <h1 class="grid-span">🗺</h1>
             </div>
         </div>
+        <div class="largebox">
+            <div style="display: none;" id="box9" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: none;" id="box10" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금2</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..2</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크2</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링2</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..2</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크2</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타2</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..2</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크2</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: none;" id="box11" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금3</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링3</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타3</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="display: none;" id="box12" class="box">
+                <div id="Accordion_wrap">
+                    <div class="keyword big-text">
+                        <span>장학금4</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>글쓰기 튜터링4</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div>
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                    <div class="keyword big-text">
+                        <span>기타4</span>
+                        <div class="arrow-wrap">
+                            <span class="arrow-top">↑</span>
+                            <span class="arrow-bottom">↓</span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="container-sm">
+                            <div>
+                                <img
+                                    src="../resource/whole_map.png"
+                                    class="rounded mx-auto d-block"
+                                    alt="서강대학교 지도"
+                                />
+                            </div>
+                            <div>
+                                <span>학생 지원팀 관련 텍스트..</span>
+                            </div>
+                            <a href="http://www.sogang.ac.kr/bachelor/">학지팀 링크</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             $('.keyword').click(function () {
                 $(this).next('.content').stop().slideToggle(300);
