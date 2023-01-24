@@ -28,7 +28,6 @@
                 margin-top: 1rem;
                 font-size: 1.8rem;
             }
-
             .grid-span {
                 font-size: 5vw;
                 text-align: center;
@@ -39,12 +38,18 @@
                 grid-column-start: 1;
                 grid-column-end: 3;
             }
-
+            .grid-15 {
+                grid-column-start: 1;
+                grid-column-end: 5;
+            }
             .grid-24 {
                 grid-column-start: 2;
                 grid-column-end: 4;
             }
-
+            .grid-25 {
+                grid-column-start: 2;
+                grid-column-end: 5;
+            }
             .grid-35 {
                 grid-column-start: 3;
                 grid-column-end: 5;
@@ -170,7 +175,6 @@
 
             }
         </script>
-
         <div class="grid">
             <div class="grid-item" style="background-color: #d50000; color: white;" onclick="controlInfoBox(1)">
                 <br /><br />
@@ -1502,6 +1506,52 @@
                     캠퍼스맵/편의시설
                 </h2>
             </div>
+            <div class="grid-item grid-25" 
+            style="background-color: white; border:black; border: solid; width:100%">
+                <table style="width:100%; margin-top:1rem">
+                    <thead >
+                        <tr >
+                            <th class="grid-title" colspan="3">서강 Q Card</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr >
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 16 16">
+                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z"/>
+                                  </svg>
+                            </td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 16 16">
+                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z"/>
+                                  </svg>
+                            </td>
+                            <td>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 16 16">
+                                    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z"/>
+                                  </svg>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>
+                                    주관: OOO
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    기획: OOO
+                                </p>
+                            </td>
+                            <td>
+                                <p>
+                                    개발: OOO
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="largebox">
             <div style="display: none;" id="box16" class="box">
@@ -1547,49 +1597,50 @@
         </div>
         <!-- ### 5열 끝 ### -->
 
-        <div style="text-align: center;">
-            <table style="width: 100% !important;">
-                <thead>
-                    <tr>
-                        <th colspan="3">🔗교내 주요 페이지 바로가기</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <a href="https://www.sogang.ac.kr/campus/b_campus.html" style="text-decoration-line: none;"
-                                title="PC실/휴게실/열람실/복사실/보건실 등">
-                                편의시설
-                            </a>
-                        </td>
-                        <td>
-                            <a href="https://sc.sogang.ac.kr/soriindex.do" style="text-decoration-line: none;"
-                                title="조교모집, 자원봉사 모집">청년광장</a>
-                        </td>
-                        <td>
-                            <a href="https://www.sogang.ac.kr/campus/b_club03.html" style="text-decoration-line: none;"
-                                title="학생회/중앙동아리">동아리</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="https://sogang.ac.kr/bachelor/haksa/course01.html"
-                                style="text-decoration-line: none;" title="다전공,복수전공,학생설계">🔗학사지원 링크</a>
-                        </td>
-                        <td>
-                            <a href="https://convedu.sogang.ac.kr/convedu/index.html" style="" title="연계, 마이크로전공">융합교육원
-                                링크</a>
-                        </td>
-                        <td>
-                            <p>
-                                <a href="https://www.sogang.ac.kr/index.do" style="text-decoration-line: none;">학교
-                                    홈페이지</a>
-                            </p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <br />
+        <div class="grid" style="text-align: center;">
+            <div class="grid-item grid-15">
+                <table style="width: 100% !important;">
+                    <thead>
+                        <tr>
+                            <th colspan="3">🔗교내 주요 페이지 바로가기</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href="https://www.sogang.ac.kr/campus/b_campus.html" style="text-decoration-line: none;"
+                                    title="PC실/휴게실/열람실/복사실/보건실 등">
+                                    편의시설
+                                </a>
+                            </td>
+                            <td>
+                                <a href="https://sc.sogang.ac.kr/soriindex.do" style="text-decoration-line: none;"
+                                    title="조교모집, 자원봉사 모집">청년광장</a>
+                            </td>
+                            <td>
+                                <a href="https://www.sogang.ac.kr/campus/b_club03.html" style="text-decoration-line: none;"
+                                    title="학생회/중앙동아리">동아리</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="https://sogang.ac.kr/bachelor/haksa/course01.html"
+                                    style="text-decoration-line: none;" title="다전공,복수전공,학생설계">학사지원 링크</a>
+                            </td>
+                            <td>
+                                <a href="https://convedu.sogang.ac.kr/convedu/index.html" style="text-decoration-line: none;" title="연계, 마이크로전공">융합교육원
+                                    링크</a>
+                            </td>
+                            <td>
+                                <p>
+                                    <a href="https://www.sogang.ac.kr/index.do" style="text-decoration-line: none;">학교
+                                        홈페이지</a>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <script>
             $('.keyword').click(function () {
@@ -1598,11 +1649,12 @@
                 $(this).next('.content').siblings('.content').slideUp(300);
             });
         </script>
+        <!-- 
+        2022.11 ~ 2023.02
+        author : Growbigger
+         -->
     </div>
 </body>
-/*
-2022.11 ~ 2023.02
-author : Growbigger
-*/
+
 
 </html>
