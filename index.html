@@ -141,13 +141,11 @@
             function controlInfoBox(boxNum) {
                 let boxId = 'box' + boxNum;
                 let box = document.getElementById(boxId);
-                
-                
 
                 let boxList = document.getElementsByClassName('box');
                 Array.from(boxList).forEach(element => {
                     if (element.id != boxId){
-                        $(element).siblings('.box').slideUp(200);
+                        $(element).slideUp(200);
                     }
                 });
                 
