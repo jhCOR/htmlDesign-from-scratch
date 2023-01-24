@@ -141,9 +141,17 @@
             function controlInfoBox(boxNum) {
                 let boxId = 'box' + boxNum;
                 let box = document.getElementById(boxId);
-                $(box).siblings('.box').slideUp(200);
-                $(box).delay(200).slideToggle(400);
+                
+                
 
+                let boxList = document.getElementsByClassName('box');
+                Array.from(boxList).forEach(element => {
+                    if (element.id != boxId){
+                        $(element).siblings('.box').slideUp(200);
+                    }
+                });
+                
+                $(box).delay(200).slideToggle(400);
                 switchIconColor(boxNum);
             }
             function switchIconColor(num) {
