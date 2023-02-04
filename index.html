@@ -201,11 +201,22 @@
         <script>
             const allowedType = {
                 'numerical': 'number',
-                'linguistic': 'string'
+                'linguistic': 'string',
+            }
+            const allowedFormat = {
+                'url_format': 0,
+            }
+            const allowedState = {
+                'success': 0,
+                'failed': -1,
             }
             Object.freeze(allowedType);
+            Object.freeze(allowedFormat);
+            Object.freeze(allowedState);
             const MAX = 4;
+            // class response{
 
+            // }
             class urlData {
                 constructor(max_num) {
                     this.urlObject = {};
@@ -225,6 +236,14 @@
                 checkType(value, targetType) {
                     if (typeof value !== targetType) {
                         throw new Error('expected ' + targetType + ' but given:' + typeof value);
+                    }
+                }
+                checkFormat(data, targetFormat){
+                    if(targetFormat == allowedFormat.url_format){
+                        let urlformat = /^http[s]?:\/\/([\S]{3,})/i;
+                        return {result:urlformat.test(data), "msg": "URL주소 형식을 다시 확인해주시기 바랍니다."};
+                    }else{
+                        return {result:true, "msg": " "};
                     }
                 }
                 getUrl(index) {
@@ -284,8 +303,13 @@
                     return this.urlObject;
                 }
                 setData(name, value, index) {
-                    this.urlObject.setUrl(name, value, parseInt(index));
-                    return this;
+                    let isvaildUrl = this.urlObject.checkFormat(value, allowedFormat.url_format);
+                    if(isvaildUrl.result){
+                        this.urlObject.setUrl(name, value, parseInt(index));
+                        return {state: allowedState.success, msg:"저장하였습니다."};
+                    }else{
+                        return {state: allowedState.failed, msg:isvaildUrl.msg};
+                    }
                 }
             }
 
@@ -345,8 +369,10 @@
                 let name_input = document.getElementById('url_name');
                 let url_input = document.getElementById('url');
                 let formNum = document.getElementById('num');
-                quickDataObject.setData(name_input.value, url_input.value, formNum.value);
-                quickDataObject.saveData();
+                let response = quickDataObject.setData(name_input.value, url_input.value, formNum.value);
+               
+                if(response.state==-1) window.alert(response.msg);
+                if(response.state==0) quickDataObject.saveData();
                 quickDataObject.display();
             }
             function removeForm() {
@@ -1774,7 +1800,7 @@
             <table style="width:100%">
                 <thead>
                     <tr>
-                        <th colspan="5">The table header</th>
+                        <th colspan="3" style="font-size: 2rem;">Sogang Quick Link</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -1870,10 +1896,10 @@
                         </td>
 
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <button onclick="check()">저장된 리스트</button>
                         <button onclick="clearForm()">저장된 리스트 전부 삭제</button>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
             <div id="urlForm" style="display:none">
