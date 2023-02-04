@@ -160,6 +160,9 @@
             .keyword.on .arrow-top {
                 display: block;
             }
+            .selector:hover {
+                background-color: gray;
+            }
         </style>
         <script>
             function controlInfoBox(boxNum) {
@@ -295,7 +298,11 @@
                         element.innerText = this.urlObject.getUrl(index)[0];
                     });
                     linkSVG.forEach((element, index) => {
-                        element.style.color = 'gray';
+                        if(this.urlObject.getUrl(index)[1]=='NO_URL'){
+                            element.style.color = 'gray';
+                        }else{
+                            element.style.color = 'black';
+                        }
                     });
 
                 }
@@ -313,6 +320,8 @@
                 }
             }
 
+        </script>
+        <script>
             var urlObject = new urlData(MAX); //최대 5개까지 저장하는 url data object 생성
             var quickDataObject = new quickDataHandler(urlObject);
 
@@ -320,11 +329,44 @@
                 quickDataObject.loadData();
                 console.log(quickDataObject.getData());
                 quickDataObject.display();
+
+                attachListener();
+                
+                // let input_url = document.getElementById('url');
+                // input_url.addEventListener('blur', function(event){
+                //     console.log(event)
+                // })
+                var body = document.querySelector("body");
+                body.addEventListener('click', bodyEventer);
             });
         </script>
         <script>
+            function bodyEventer(event){
+                if(event.target.class == 'selector' | event.target.id == 'url'){
+                    
+                }else{
+                    let selectedBox = document.getElementById('selectBox');
+                    if(selectedBox.style.display == 'block'){
+                        closeSelectBox();
+                    }
+                }
+            }
+            function attachListener(){
+                let selectorList = document.getElementsByClassName('selector');
+                let name_input = document.getElementById('url_name');
+                let url_input = document.getElementById('url');
+
+                selectorList = Array.from(selectorList);
+                selectorList.forEach((element, index)=>{
+                    element.addEventListener('click', function(event){
+                        url_input.value = event.target.value;
+                        name_input.value = event.target.innerText;
+                        
+                        console.log(event.target);
+                    });
+                })
+            }
             function check() {
-                console.log("CHECK:")
                 quickDataObject.loadData();
                 console.log(quickDataObject.getData());
             }
@@ -341,7 +383,7 @@
 
                 if (form.style.display == 'none') {
                     form.style.display = 'block';
-                    console.log(num)
+                    
                     let url_name = quickDataObject.getData().getUrl(num);
                     if (url_name[1] != 'NO_URL') {
                         name_input.value = url_name[0];
@@ -1903,13 +1945,26 @@
                 </tbody>
             </table>
             <div id="urlForm" style="display:none">
-                <label for="url">바로가기를 설정할 URL을 입력해주세요</label>
+                <div style="float: left;">
+                    <label for="url">바로가기를 설정할 URL을 입력해주세요</label>
+                    <svg onclick="closeForm()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-x-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </div>
+                
                 <br />
                 <input hidden id="num" value="">
                 <input type="text" placeholder="설정할 이름" id="url_name" name="url_name" required size="30" minlength="1"
                     maxlength="6">
                 <br />
-                <input type="url" placeholder="바로가기 링크" id="url" name="url" required size="30">
+                <input onfocus="openSelectBox()" type="url" placeholder="바로가기 링크" id="url" name="url" required size="30">
+                <div style="width:250px; background-color: white; display:none; position:absolute;" id="selectBox">
+                    <option class="selector" value="http://www.ssodam.com/">서담</option>
+                    <option class="selector" value="https://sc.sogang.ac.kr/soriindex.do">청년광장</option>
+                    <option class="selector" value="https://www.sogang.ac.kr/bachelor/onestop/menu.html">식단표</option>
+                    <option class="selector" value="https://library.sogang.ac.kr/">도서관</option>
+                </div>
                 <button onclick="saveForm()">저장</button>
                 <button onclick="removeForm()">삭제</button>
             </div>
@@ -1918,7 +1973,15 @@
         <!-- ### 5열 끝 ### -->
         <h4 style="font-weight: lighter;">Copyright © 2023 전인교육원 교양교육연구실<br></h4>
         <script>
-
+            function openSelectBox(){
+                let selectedBox = document.getElementById('selectBox');
+                selectedBox.style.display='block';
+            }
+            function closeSelectBox(){
+                let selectedBox = document.getElementById('selectBox');
+                selectedBox.style.display='none';
+            }
+            
             $('.keyword').click(function () {
                 $(this).next('.content').stop().slideToggle(300);
                 $(this).toggleClass('on').siblings().removeClass('on');
