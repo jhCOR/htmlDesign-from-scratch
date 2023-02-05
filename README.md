@@ -15,7 +15,7 @@
 ## How it works? 💡
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/63538097/209511449-fc25da47-f348-4e71-b895-e4376993ecc9.gif)
 
-## Ver 2.0.0 ⛏⛏
+## Ver 2.0.0
 - 여러 칸을 차지하는 그리드 셀 기능(css class로 구현, grid-13, grid-24, grid-35)
 - 클릭된 상자 아이콘 색 변경 기능
 - 그리드 체계 로직 개선
@@ -23,3 +23,14 @@
 ## How it works? 💡
 ![image](https://user-images.githubusercontent.com/63538097/214217315-bde38295-65df-4732-825f-7d4d3f84c878.png)
 
+## Ver 2.1.0
+- 아이콘 이미지 수정
+- 링크 수정
+- 지도 일부 항목에서 제거 및 링크 이름 수정
+
+## Ver 3.0.0 ⛏️⛏️
+- 자주 이동하는 홈페이지를 추가할 수 있도록 Quick Link기능 제공
+> urlData, quickDataHandler참조
+
+###TODO### 
+- form control method를 객체지향적인 코드로 수정
