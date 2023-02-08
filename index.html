@@ -357,7 +357,6 @@
 
                 window.addEventListener('load', function (event) {
                     quickDataObject.loadData();
-                    console.log(quickDataObject.getData());
                     quickDataObject.display();
 
                     attachListener();
@@ -384,10 +383,9 @@
                     selectorList = Array.from(selectorList);
                     selectorList.forEach((element, index) => {
                         element.addEventListener('click', function (event) {
-                            url_input.value = event.target.value;
+                            url_input.value = event.target.dataset.value;
                             name_input.value = event.target.innerText;
-
-                            console.log(event.target);
+							console.log(event.target.dataset)
                         });
                     });
                 }
@@ -2316,7 +2314,7 @@
                 <table style="width: 100%;">
                     <thead>
                         <tr>
-                            <th colspan="3" style="font-size: 2rem;">Quick Link</th>
+                            <th colspan="3" ><h2>Quick Link: <span style="font-size:1rem">자주 쓰는 링크 바로가기를 등록하기</span></h2> </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -2521,6 +2519,7 @@
                         size="30"
                         minlength="1"
                         maxlength="6"
+						   width="300"
                     />
                     <br />
                     <input
@@ -2531,6 +2530,7 @@
                         name="url"
                         required
                         size="30"
+						width="300"
                     />
                     <div
                         style="
@@ -2541,18 +2541,15 @@
                         "
                         id="selectBox"
                     >
-                        <option class="selector" value="http://www.ssodam.com/">서담</option>
-                        <option class="selector" value="https://sc.sogang.ac.kr/soriindex.do"
-                            >청년광장</option
-                        >
-                        <option
+                        <div class="selector" data-value="http://www.ssodam.com/">서담</div>
+                        <div class="selector" data-value="https://sc.sogang.ac.kr/soriindex.do"
+                            >청년광장</div>
+                        <div
                             class="selector"
-                            value="https://www.sogang.ac.kr/bachelor/onestop/menu.html"
-                            >식단표</option
-                        >
-                        <option class="selector" value="https://library.sogang.ac.kr/"
-                            >도서관</option
-                        >
+                            data-value="https://www.sogang.ac.kr/bachelor/onestop/menu.html"
+                            >식단표</div>
+                        <div class="selector" data-value="https://library.sogang.ac.kr/"
+                            >도서관</div>
                     </div>
                     <button onclick="saveForm()">저장</button>
                     <button onclick="removeForm()">삭제</button>
