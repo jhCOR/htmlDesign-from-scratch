@@ -225,16 +225,67 @@
             const allowedState = {
                 success: 0,
                 failed: -1,
+                error: -100
             };
+            const storageType = {
+                session: 1000,
+                server: 1001,
+                cookie: 1002
+            }
             Object.freeze(allowedType);
             Object.freeze(allowedFormat);
             Object.freeze(allowedState);
-            const MAX = 4;
-            // class response{
+            Object.freeze(storageType);
 
-            // }
-            class urlData {
+            const MAX = 4;
+
+            class response {
+                constructor(storageType, url) {
+                    if (storageType) {
+                        this.storage = storageType;
+                        if (this.storage == storageType.server & url) {
+                            this.targetURL = url;
+                        }
+                    }
+                }
+                makeRes(object) {
+                    let state = object?.state ? this.checkType(object.state, allowedType.numerical) : null;
+                    let msg = object?.msg ? this.checkType(object.msg, allowedType.linguistic) : null;
+                    let result = { state: state, msg: msg, result: object?.result };
+
+                    return this.loggingResponse(result);
+                }
+                loggingResponse(result) {
+                    if (this.storage) {
+                        //session.setItem()
+                    }
+                    return result
+                }
+                sendResponseTo() {
+                    const Http = new XMLHttpRequest();
+
+                    Http.open('GET', this.targetURL);
+                    Http.send();
+                    Http.onreadystatechange = (e) => {
+                    };
+                }
+                checkType(value, targetType) {
+                    if (typeof value !== targetType) {
+                        throw new Error(
+                            'expected ' + targetType + ' but given:' + typeof value
+                        );
+                    }
+                    return value
+                }
+                to(storage, url) {
+                    this.storage = storage;
+                    this.targetURL = url;
+                }
+            }
+
+            class urlData extends response {
                 constructor(max_num) {
+                    super(null, null);
                     this.urlObject = {};
                     for (let i = 0; i < max_num; i++) {
                         this.urlObject[i] = [' ', 'NO_URL'];
@@ -249,22 +300,17 @@
                 setAllUrl(object) {
                     this.urlObject = object;
                 }
-                checkType(value, targetType) {
-                    if (typeof value !== targetType) {
-                        throw new Error(
-                            'expected ' + targetType + ' but given:' + typeof value
-                        );
-                    }
-                }
+
                 checkFormat(data, targetFormat) {
                     if (targetFormat == allowedFormat.url_format) {
                         let urlformat = /^http[s]?:\/\/([\S]{3,})/i;
-                        return {
+                        return this.makeRes({
                             result: urlformat.test(data),
                             msg: 'URL주소 형식을 다시 확인해주시기 바랍니다.',
-                        };
+                            state: allowedState.failed
+                        })
                     } else {
-                        return { result: true, msg: ' ' };
+                        return this.makeRes({ result: true, msg: ' ' })
                     }
                 }
                 getUrl(index) {
@@ -280,8 +326,10 @@
                     return JSON.parse(json);
                 }
             }
-            class quickDataHandler {
+
+            class quickDataHandler extends response {
                 constructor(object) {
+                    super(null, null);
                     this.urlObject = object;
                     this.mainKey = 'sogangQuickURL';
                 }
@@ -335,10 +383,51 @@
                     );
                     if (isvaildUrl.result) {
                         this.urlObject.setUrl(name, value, parseInt(index));
-                        return { state: allowedState.success, msg: '저장하였습니다.' };
+                        return this.makeRes({ state: allowedState.success, msg: '저장하였습니다.' });
                     } else {
-                        return { state: allowedState.failed, msg: isvaildUrl.msg };
+                        return this.makeRes({ state: allowedState.failed, msg: isvaildUrl.msg });
                     }
+                }
+            }
+        </script>
+        <script>
+            const elements = {
+                id: [],
+                class: [],
+            };
+            Object.freeze(elements);
+            
+            class element {
+                constructor(){
+                    this.current = null;
+                    let selectedBox = document.getElementById('selectBox');
+                    this.selectorList = document.getElementsByClassName('selector');
+                    this.name_input = document.getElementById('url_name');
+                    this.url_input = document.getElementById('url');
+                }
+                toList(object){
+                    return Array.from(object);
+                }
+                find(key){
+                    let keyList = Object.keys()
+                    if(keyList.includes(key)){
+                        this.current = this[key];
+                    }else{
+                        throw new Error(
+                            'cannot find element for:' + key
+                        );
+                    }
+                }
+                setElement(key, value){
+                    this[key] = value;
+                    return this;
+                }
+                getElement(key){
+                    find(key)
+                    return this;
+                }
+                hide(element){
+                    let targetElement = element?element:this.current;
                 }
             }
         </script>
@@ -429,7 +518,7 @@
                     formNum.value
                 );
 
-                if (response.state == -1) window.alert(response.msg);
+                window.alert(response.msg);
                 if (response.state == 0) quickDataObject.saveData();
                 quickDataObject.display();
             }
@@ -1883,9 +1972,11 @@
                 style="text-decoration-line: none;">
                 <div class="grid-item" style="background-color: #d50000; color: white;">
                     <br><br>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray" class="bi bi-pc-display-horizontal" viewBox="0 0 16 16">
-                        <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0h-13Zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5ZM12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0Zm2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0ZM1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1ZM1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25Z"/>
-                      </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="bi bi-pc-display-horizontal" viewBox="0 0 16 16">
+                        <path
+                            d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0h-13Zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5ZM12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0Zm2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0ZM1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1ZM1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25Z" />
+                    </svg>
                     <h2 class="grid-title">
                         사이버 캠퍼스
                     </h2>
@@ -1916,7 +2007,7 @@
         <!-- ### 7열 끝 ### -->
 
 
-        <br>
+
         <div style="width: 100%;">
             <div class="grid">
                 <div class="grid-item grid-15">
@@ -2054,80 +2145,54 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr></tr>
                             <!-- <tr>
                             <button onclick="check()">저장된 리스트</button>
                             <button onclick="clearForm()">저장된 리스트 전부 삭제</button>
                         </tr> -->
                         </tbody>
                     </table>
-                    <div id="urlForm" style="font-size:1.2rem; width:360px; display: none; text-align: left;">
-                        <div >
+                    <div id="urlForm"
+                        style="background-color: #a3a3a3; border-radius: 10px; font-size:1.2rem; width:360px; display: none; text-align: left;">
+                        <div style="margin-top: 20px; text-align: center;">
                             <label for="url">바로가기 설정할 URL을 입력해주세요</label>
-                            <svg
-                                onclick="closeForm()"
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="20"
-                                height="20"
-                                fill="red"
-                                class="bi bi-x-square"
-                                viewBox="0 0 16 16"
-                            >
+                            <svg onclick="closeForm()" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="red" class="bi bi-x-square" viewBox="0 0 16 16">
                                 <path
-                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"
-                                />
+                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                                 <path
-                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                                />
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                             </svg>
                         </div>
-                        <div style="margin-top: 20px;">
-                            <input hidden id="num" value="" style="width: 300px;"/>
-                            <input
-                                type="text"
-                                placeholder="설정할 이름"
-                                id="url_name"
-                                name="url_name"
-                                required
-                                minlength="1"
+                        <div style="margin-top: 20px; text-align: center;">
+                            <input hidden id="num" value="" style="width: 300px;" />
+                            <input type="text" placeholder="설정할 이름" id="url_name" name="url_name" required minlength="1"
                                 maxlength="6"
-                                style="width: 100%; font-size: large;"
-                            />
+                                style="width: 95%; font-size: large; border-radius: 10px; border: none;" />
                             <br />
-                            <input
-                                onfocus="openSelectBox()"
-                                type="url"
-                                placeholder="바로가기 링크"
-                                id="url"
-                                name="url"
-                                required
-                                style="width: 100%; font-size: large;"
-                            />
+                            <input onfocus="openSelectBox()" type="url" placeholder="바로가기 링크" id="url" name="url"
+                                required style="width: 95%; font-size: large; border-radius: 10px; border: none;" />
                         </div>
                         <div>
-                            <div
-                                style="
-                                    width: 310px;
+                            <div style="
+                                    width: 320px;
                                     background-color: white !important;
                                     display: none;
                                     position: absolute;
-                                "
-                                id="selectBox"
-                            >
-                            <div class="selector" data-value="http://www.ssodam.com/">서담</div>
-                            <div class="selector" data-value="https://sc.sogang.ac.kr/soriindex.do"
-                                >청년광장</div>
-                            <div
-                                class="selector"
-                                data-value="https://www.sogang.ac.kr/bachelor/onestop/menu.html"
-                                >식단표</div>
-                            <div class="selector" data-value="https://library.sogang.ac.kr/"
-                                >도서관</div>
+                                    z-index: 999;
+                                    margin-left: 20px;
+                                " id="selectBox">
+                                <div class="selector" data-value="http://www.ssodam.com/">서담</div>
+                                <div class="selector" data-value="https://sc.sogang.ac.kr/soriindex.do">청년광장</div>
+                                <div class="selector" data-value="https://www.sogang.ac.kr/bachelor/onestop/menu.html">
+                                    식단표</div>
+                                <div class="selector" data-value="https://library.sogang.ac.kr/">도서관</div>
+                            </div>
                         </div>
-                        </div>
-                        <div style="margin-top: 20px;">
-                            <button onclick="saveForm()" style="width: 170px; height: 30px;">저장</button>
-                            <button onclick="removeForm()" style="margin-left:10px; width: 170px; height: 30px;">삭제</button>
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button onclick="saveForm()"
+                                style="border:solid black 2px !important; border-radius: 5px; border: none; width: 170px; height: 30px;">저장</button>
+                            <button onclick="removeForm()"
+                                style="border:solid black 2px !important; border-radius: 5px; border: none; margin-left:5px; width: 170px; height: 30px;">삭제</button>
                         </div>
                     </div>
                 </div>
@@ -2153,6 +2218,8 @@
     2022.11 ~ 2023.02
     author : Growbigger
      -->
+        <!-- 남은 작업:
+    1. css정리 -->
     </div>
 </body>
 
