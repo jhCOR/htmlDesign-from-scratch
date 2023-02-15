@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
+
     <head>
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
         <link rel="SHORTCUT ICON" href="./resource/rec_logo.png" />
-        <meta
-            name="viewport"
-            content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"
-        />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
     </head>
 
     <body>
@@ -71,12 +69,12 @@
                 .img-container {
                     text-align: center;
                 }
-                .normal-box {
+                .normal-box{
                     background-color: #d50000;
                     color: white;
                 }
-                .clean-button {
-                    border: solid black 2px !important;
+                .clean-button{
+                    border:solid black 2px !important;
                     border-radius: 10px;
                 }
                 @media screen and (max-width: 375px) {
@@ -140,7 +138,7 @@
                     margin: 0 5px;
                 }
 
-                .keyword.on > span {
+                .keyword.on>span {
                     font-weight: bold;
                     color: #006633;
                 }
@@ -234,13 +232,13 @@
                 const allowedState = {
                     success: 0,
                     failed: -1,
-                    error: -100,
+                    error: -100
                 };
                 const storageType = {
                     session: 1000,
                     server: 1001,
-                    cookie: 1002,
-                };
+                    cookie: 1002
+                }
                 Object.freeze(allowedType);
                 Object.freeze(allowedFormat);
                 Object.freeze(allowedState);
@@ -252,18 +250,14 @@
                     constructor(storageType, url) {
                         if (storageType) {
                             this.storage = storageType;
-                            if ((this.storage == storageType.server) & url) {
+                            if (this.storage == storageType.server & url) {
                                 this.targetURL = url;
                             }
                         }
                     }
                     makeRes(object) {
-                        let state = object?.state
-                            ? this.checkType(object.state, allowedType.numerical)
-                            : null;
-                        let msg = object?.msg
-                            ? this.checkType(object.msg, allowedType.linguistic)
-                            : null;
+                        let state = object?.state ? this.checkType(object.state, allowedType.numerical) : null;
+                        let msg = object?.msg ? this.checkType(object.msg, allowedType.linguistic) : null;
                         let result = { state: state, msg: msg, result: object?.result };
 
                         return this.loggingResponse(result);
@@ -272,14 +266,15 @@
                         if (this.storage) {
                             //session.setItem()
                         }
-                        return result;
+                        return result
                     }
                     sendResponseTo() {
                         const Http = new XMLHttpRequest();
 
                         Http.open('GET', this.targetURL);
                         Http.send();
-                        Http.onreadystatechange = (e) => {};
+                        Http.onreadystatechange = (e) => {
+                        };
                     }
                     checkType(value, targetType) {
                         if (typeof value !== targetType) {
@@ -287,7 +282,7 @@
                                 'expected ' + targetType + ' but given:' + typeof value
                             );
                         }
-                        return value;
+                        return value
                     }
                     to(storage, url) {
                         this.storage = storage;
@@ -319,10 +314,10 @@
                             return this.makeRes({
                                 result: urlformat.test(data),
                                 msg: 'URL주소 형식을 다시 확인해주시기 바랍니다.',
-                                state: allowedState.failed,
-                            });
+                                state: allowedState.failed
+                            })
                         } else {
-                            return this.makeRes({ result: true, msg: ' ' });
+                            return this.makeRes({ result: true, msg: ' ' })
                         }
                     }
                     getUrl(index) {
@@ -395,15 +390,9 @@
                         );
                         if (isvaildUrl.result) {
                             this.urlObject.setUrl(name, value, parseInt(index));
-                            return this.makeRes({
-                                state: allowedState.success,
-                                msg: '저장하였습니다.',
-                            });
+                            return this.makeRes({ state: allowedState.success, msg: '저장하였습니다.' });
                         } else {
-                            return this.makeRes({
-                                state: allowedState.failed,
-                                msg: isvaildUrl.msg,
-                            });
+                            return this.makeRes({ state: allowedState.failed, msg: isvaildUrl.msg });
                         }
                     }
                 }
@@ -414,36 +403,38 @@
                     class: [],
                 };
                 Object.freeze(elements);
-
+                
                 class element {
-                    constructor() {
+                    constructor(){
                         this.current = null;
                         let selectedBox = document.getElementById('selectBox');
                         this.selectorList = document.getElementsByClassName('selector');
                         this.name_input = document.getElementById('url_name');
                         this.url_input = document.getElementById('url');
                     }
-                    toList(object) {
+                    toList(object){
                         return Array.from(object);
                     }
-                    find(key) {
-                        let keyList = Object.keys();
-                        if (keyList.includes(key)) {
+                    find(key){
+                        let keyList = Object.keys()
+                        if(keyList.includes(key)){
                             this.current = this[key];
-                        } else {
-                            throw new Error('cannot find element for:' + key);
+                        }else{
+                            throw new Error(
+                                'cannot find element for:' + key
+                            );
                         }
                     }
-                    setElement(key, value) {
+                    setElement(key, value){
                         this[key] = value;
                         return this;
                     }
-                    getElement(key) {
-                        find(key);
+                    getElement(key){
+                        find(key)
                         return this;
                     }
-                    hide(element) {
-                        let targetElement = element ? element : this.current;
+                    hide(element){
+                        let targetElement = element?element:this.current;
                     }
                 }
             </script>
@@ -481,7 +472,7 @@
                         element.addEventListener('click', function (event) {
                             url_input.value = event.target.dataset.value;
                             name_input.value = event.target.innerText;
-                            console.log(event.target.dataset);
+                            console.log(event.target.dataset)
                         });
                     });
                 }
@@ -556,89 +547,57 @@
                 }
             </script>
             <div class="grid">
-                <div class="grid-item normal-box" onclick="controlInfoBox(1)">
-                    <br /><br />
-                    <svg
-                        id="svg1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-grid-3x3-gap"
-                        viewBox="0 0 16 16"
-                    >
+                <div class="grid-item normal-box"  onclick="controlInfoBox(1)">
+                    <br><br>
+                    <svg id="svg1" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-grid-3x3-gap" viewBox="0 0 16 16">
                         <path
-                            d="M4 2v2H2V2h2zm1 12v-2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm5 10v-2a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V7a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V2a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zM9 2v2H7V2h2zm5 0v2h-2V2h2zM4 7v2H2V7h2zm5 0v2H7V7h2zm5 0h-2v2h2V7zM4 12v2H2v-2h2zm5 0v2H7v-2h2zm5 0v2h-2v-2h2zM12 1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zm-1 6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zm1 4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-2z"
-                        ></path>
+                            d="M4 2v2H2V2h2zm1 12v-2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm5 10v-2a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V7a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zm0-5V2a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zM9 2v2H7V2h2zm5 0v2h-2V2h2zM4 7v2H2V7h2zm5 0v2H7V7h2zm5 0h-2v2h2V7zM4 12v2H2v-2h2zm5 0v2H7v-2h2zm5 0v2h-2v-2h2zM12 1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zm-1 6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zm1 4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-2z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         서강 필수 앱
                     </h2>
                 </div>
-                <div class="grid-item normal-box" onclick="controlInfoBox(2)">
-                    <br /><br />
-                    <svg
-                        id="svg2"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-shop"
-                        viewBox="0 0 16 16"
-                    >
+                <div class="grid-item normal-box"  onclick="controlInfoBox(2)">
+                    <br><br>
+                    <svg id="svg2" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-shop" viewBox="0 0 16 16">
                         <path
-                            d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"
-                        ></path>
+                            d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         학식메뉴
                     </h2>
                 </div>
                 <div class="grid-item normal-box" onclick="controlInfoBox(3)">
-                    <br /><br />
-                    <svg
-                        id="svg3"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-coin"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg3" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-coin" viewBox="0 0 16 16">
                         <path
-                            d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"
-                        ></path>
-                        <path
-                            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                        ></path>
-                        <path
-                            d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"
-                        ></path>
+                            d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z">
+                        </path>
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                        <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
                     </svg>
                     <h2 class="grid-title">
                         장학금&nbsp;
                     </h2>
                     <h2 class="grid-title">받기</h2>
                 </div>
-                <div class="grid-item normal-box" onclick="controlInfoBox(4)">
-                    <br /><br />
-                    <svg
-                        id="svg4"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-mortarboard"
-                        viewBox="0 0 16 16"
-                    >
+                <div class="grid-item normal-box"  onclick="controlInfoBox(4)">
+                    <br><br>
+                    <svg id="svg4" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-mortarboard" viewBox="0 0 16 16">
                         <path
-                            d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z"
-                        ></path>
+                            d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5ZM8 8.46 1.758 5.965 8 3.052l6.242 2.913L8 8.46Z">
+                        </path>
                         <path
-                            d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z"
-                        ></path>
+                            d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z">
+                        </path>
                     </svg>
-                    <h2 class="grid-title">성적/출결<br />/졸업</h2>
+                    <h2 class="grid-title">성적/출결<br>/졸업</h2>
                 </div>
             </div>
             <div class="largebox">
@@ -654,20 +613,17 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >서강대 학생들을 위한 전체 공지사항을 확인하고, 교수님 및
+                                    <span>서강대 학생들을 위한 전체 공지사항을 확인하고, 교수님 및
                                         수강생들끼리 메시지를 주고받을 수 있는 서강대생의 필수
                                         어플입니다.
                                     </span>
                                 </div>
+                                <a href="https://play.google.com/store/apps/details?id=com.dbs.mthink.sogang">📥Android
+                                    다운로드</a>
+                                <br>
                                 <a
-                                    href="https://play.google.com/store/apps/details?id=com.dbs.mthink.sogang"
-                                    >📥Android 다운로드</a
-                                >
-                                <br />
-                                <a
-                                    href="https://apps.apple.com/kr/app/%EC%84%9C%EA%B0%95%ED%86%A1%ED%86%A1-2-0/id1223334584"
-                                    >📥IOS 다운로드
+                                    href="https://apps.apple.com/kr/app/%EC%84%9C%EA%B0%95%ED%86%A1%ED%86%A1-2-0/id1223334584">📥IOS
+                                    다운로드
                                 </a>
                             </div>
                         </div>
@@ -681,17 +637,13 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >실제 학생증이 없어도 모바일로 학생증 QR코드를 생성하여
-                                        건물에 출입할 수 있습니다.</span
-                                    >
+                                    <span>실제 학생증이 없어도 모바일로 학생증 QR코드를 생성하여
+                                        건물에 출입할 수 있습니다.</span>
                                 </div>
-                                <a href="https://play.google.com/store/apps/details?id=net.wise.sgu"
-                                    >📥Android 다운로드</a
-                                ><br />
+                                <a href="https://play.google.com/store/apps/details?id=net.wise.sgu">📥Android 다운로드</a><br>
                                 <a
-                                    href="https://apps.apple.com/kr/app/%EC%84%9C%EA%B0%95%EB%8C%80%ED%95%99%EA%B5%90-%EB%AA%A8%EB%B0%94%EC%9D%BC-%ED%95%99%EC%83%9D%EC%A6%9D-%EC%9D%B4%EC%9A%A9%EC%A6%9D/id1224508693"
-                                    >📥IOS 다운로드
+                                    href="https://apps.apple.com/kr/app/%EC%84%9C%EA%B0%95%EB%8C%80%ED%95%99%EA%B5%90-%EB%AA%A8%EB%B0%94%EC%9D%BC-%ED%95%99%EC%83%9D%EC%A6%9D-%EC%9D%B4%EC%9A%A9%EC%A6%9D/id1224508693">📥IOS
+                                    다운로드
                                 </a>
                             </div>
                         </div>
@@ -705,18 +657,14 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >전자출결 앱을 이용하여 출석체크를 진행하는 수업도 있습니다.
+                                    <span>전자출결 앱을 이용하여 출석체크를 진행하는 수업도 있습니다.
                                         교수님의 공지사항이 있다면 그때 설치하여도 문제
-                                        없습니다.</span
-                                    >
+                                        없습니다.</span>
                                 </div>
-                                <a href="https://play.google.com/store/apps/details?id=net.wise.sgu"
-                                    >📥Android 다운로드</a
-                                ><br />
+                                <a href="https://play.google.com/store/apps/details?id=net.wise.sgu">📥Android 다운로드</a><br>
                                 <a
-                                    href="https://apps.apple.com/kr/app/%EC%84%9C%EA%B0%95%EB%8C%80%ED%95%99%EA%B5%90-%EC%A0%84%EC%9E%90%EC%B6%9C%EA%B2%B0/id1221879552"
-                                    >📥IOS 다운로드
+                                    href="https://apps.apple.com/kr/app/%EC%84%9C%EA%B0%95%EB%8C%80%ED%95%99%EA%B5%90-%EC%A0%84%EC%9E%90%EC%B6%9C%EA%B2%B0/id1221879552">📥IOS
+                                    다운로드
                                 </a>
                             </div>
                         </div>
@@ -734,15 +682,11 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >우정원과 엠마오관에서 학식을 판매합니다. 링크에서 매주
+                                    <span>우정원과 엠마오관에서 학식을 판매합니다. 링크에서 매주
                                         식단표를 확인할 수 있습니다. 재료 사정에 따라 마감시간에
-                                        변동이 있을 수 있는 점 유의 바랍니다.</span
-                                    >
+                                        변동이 있을 수 있는 점 유의 바랍니다.</span>
                                 </div>
-                                <a href="https://www.sogang.ac.kr/bachelor/onestop/menu.html"
-                                    >🔗식단표 링크</a
-                                >
+                                <a href="https://www.sogang.ac.kr/bachelor/onestop/menu.html">🔗식단표 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -755,15 +699,11 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >곤자가 플라자에는 뷔페 형식의 곤자가 컨벤션과 여러 음식점
+                                    <span>곤자가 플라자에는 뷔페 형식의 곤자가 컨벤션과 여러 음식점
                                         업체들이 입점해 있습니다. 링크에서 '후생시설' 목록을
-                                        참조하십시오.</span
-                                    >
+                                        참조하십시오.</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/campus/b_campus.html"
-                                    >🔗곤자가플라자 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/campus/b_campus.html">🔗곤자가플라자 링크</a>
                             </div>
                         </div>
                     </div>
@@ -780,14 +720,10 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >교내장학금, 교외장학금, 국가근로장학금,
-                                        청소년교육지원장학금이 있습니다.</span
-                                    >
+                                    <span>교내장학금, 교외장학금, 국가근로장학금,
+                                        청소년교육지원장학금이 있습니다.</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/students/sch/sch01.html"
-                                    >🔗장학 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/students/sch/sch01.html">🔗장학 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -800,14 +736,10 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >교내외 장학금 및 국가장학금의 운영규정과 시행세칙을 확인할
-                                        수 있습니다.</span
-                                    >
+                                    <span>교내외 장학금 및 국가장학금의 운영규정과 시행세칙을 확인할
+                                        수 있습니다.</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/students/sch/rule.html"
-                                    >🔗관련 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/students/sch/rule.html">🔗관련 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -820,16 +752,11 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >장학금 신청과 관련된 수많은 공지사항들이 올라오는 곳입니다.
+                                    <span>장학금 신청과 관련된 수많은 공지사항들이 올라오는 곳입니다.
                                         본인이 수혜 가능한 장학금을 찾는데 참고하시기
-                                        바랍니다.</span
-                                    >
+                                        바랍니다.</span>
                                 </div>
-                                <a
-                                    href="https://sogang.ac.kr/bachelor/students/notice/notice08.html"
-                                    >🔗장학공지 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/students/notice/notice08.html">🔗장학공지 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -842,14 +769,10 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >장학금 수혜가 어려운 경우, 학자금 대출 제도를 활용할 수
-                                        있습니다.</span
-                                    >
+                                    <span>장학금 수혜가 어려운 경우, 학자금 대출 제도를 활용할 수
+                                        있습니다.</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/students/loan.html"
-                                    >🔗관련 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/students/loan.html">🔗관련 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -865,12 +788,10 @@
                                     <span>
                                         -장학금과 학생활동에 대한 설명을 확인하고 직접 질문을 남길
                                         수 있습니다.
-                                        <br />TEL: 02-705-8739(학생지원팀)
+                                        <br>TEL: 02-705-8739(학생지원팀)
                                     </span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/students/qa/qa01.html"
-                                    >🔗학생지원팀 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/students/qa/qa01.html">🔗학생지원팀 링크</a>
                             </div>
                         </div>
                     </div>
@@ -887,14 +808,10 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >강의, 학교 운영 규정, 전공 등 학사와 관련된 중요한 공지들이
-                                        자주 올라오는 곳이므로 주기적인 확인을 추천드립니다.</span
-                                    >
+                                    <span>강의, 학교 운영 규정, 전공 등 학사와 관련된 중요한 공지들이
+                                        자주 올라오는 곳이므로 주기적인 확인을 추천드립니다.</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/index.html"
-                                    >🔗학사공지 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/index.html">🔗학사공지 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -907,14 +824,10 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >수업, 성적, 출결, 졸업에 관한 정보가 정리되어있는
-                                        게시판입니다.</span
-                                    >
+                                    <span>수업, 성적, 출결, 졸업에 관한 정보가 정리되어있는
+                                        게시판입니다.</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/haksa/class01.html"
-                                    >🔗학지팀 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/haksa/class01.html">🔗학지팀 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -927,19 +840,14 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >서강대학교의 2023년 주요 학사 일정들이 소개되어 있습니다.
+                                    <span>서강대학교의 2023년 주요 학사 일정들이 소개되어 있습니다.
                                     </span>
                                 </div>
-                                <a
-                                    href="webcal://outlook.office365.com/owa/calendar/a6e147b5715c4625acfa62b58acd6efc@o365.sogang.ac.kr/a20aee89513947c09d0adab6b81aae7217892722667161677430/S-1-8-1024965995-977777686-2676105393-1913603590/reachcalendar.ics"
-                                    target="_blank"
-                                >
+                                <a href="webcal://outlook.office365.com/owa/calendar/a6e147b5715c4625acfa62b58acd6efc@o365.sogang.ac.kr/a20aee89513947c09d0adab6b81aae7217892722667161677430/S-1-8-1024965995-977777686-2676105393-1913603590/reachcalendar.ics"
+                                    target="_blank">
                                     📆핸드폰 캘린더에 일정 추가하기
                                 </a>
-                                <a href="https://sogang.ac.kr/bachelor/sch_2023.html"
-                                    >🔗학사일정 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/sch_2023.html">🔗학사일정 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -952,15 +860,12 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >강의실, 교수님, 강의시간, 강의계획서 등 현재 개설된
+                                    <span>강의실, 교수님, 강의시간, 강의계획서 등 현재 개설된
                                         과목들의 정보를 확인할 수 있습니다. 지난 학기들의 강의도
-                                        확인 가능합니다.</span
-                                    >
+                                        확인 가능합니다.</span>
                                 </div>
                                 <a
-                                    href="http://sis109.sogang.ac.kr/sap/bc/webdynpro/sap/zcmw9016?sap-language=KO&amp;sap-cssurl=http%3a%2f%2fsaint.sogang.ac.kr%3a80%2fcom.sap.portal.design.urdesigndata%2fthemes%2fportal%2fcustom_tradeshow_01%2fls%2fls_sf3.css%3fv%3d10.30.7.261448.1491647873000#%20%3Chttp://sis109.sogang.ac.kr/sap/bc/webdynpro/sap/zcmw9016?sap-language=KO&amp;sap-cssurl=http://saint.sogang.ac.kr:80/com.sap.portal.design.urdesigndata/themes/portal/custom_tradeshow_01/ls/ls_sf3.css?v%3d10.30.7.261448.1491647873000#"
-                                >
+                                    href="http://sis109.sogang.ac.kr/sap/bc/webdynpro/sap/zcmw9016?sap-language=KO&amp;sap-cssurl=http%3a%2f%2fsaint.sogang.ac.kr%3a80%2fcom.sap.portal.design.urdesigndata%2fthemes%2fportal%2fcustom_tradeshow_01%2fls%2fls_sf3.css%3fv%3d10.30.7.261448.1491647873000#%20%3Chttp://sis109.sogang.ac.kr/sap/bc/webdynpro/sap/zcmw9016?sap-language=KO&amp;sap-cssurl=http://saint.sogang.ac.kr:80/com.sap.portal.design.urdesigndata/themes/portal/custom_tradeshow_01/ls/ls_sf3.css?v%3d10.30.7.261448.1491647873000#">
                                     🔗개설과목정보 링크
                                 </a>
                             </div>
@@ -975,23 +880,15 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width: 100% !important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230116_2228_2210001.JPG"
-                                        class="img txc-image"
-                                        alt="서강대학교 지도"
-                                        loading="lazy"
-                                    />
+                                        class="img txc-image" alt="서강대학교 지도" loading="lazy">
                                 </div>
                                 <div>
-                                    <span
-                                        >-학사와 관련된 사항을 확인하고 직접 질문을 남길 수
-                                        있습니다. <br />TEL: 02-705-8124(학사지원팀)</span
-                                    >
+                                    <span>-학사와 관련된 사항을 확인하고 직접 질문을 남길 수
+                                        있습니다. <br>TEL: 02-705-8124(학사지원팀)</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/counsel.html"
-                                    >🔗학사지원팀 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/counsel.html">🔗학사지원팀 링크</a>
                             </div>
                         </div>
                     </div>
@@ -1001,60 +898,37 @@
 
             <div class="grid">
                 <div class="grid-item normal-box" onclick="controlInfoBox(5)">
-                    <br /><br />
-                    <svg
-                        id="svg5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-basket3-fill"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg5" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-basket3-fill" viewBox="0 0 16 16">
                         <path
-                            d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.468 15.426.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z"
-                        ></path>
+                            d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.468 15.426.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         수강신청
                     </h2>
                 </div>
                 <div class="grid-item normal-box" onclick="controlInfoBox(6)">
-                    <br /><br />
-                    <svg
-                        id="svg6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-book"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg6" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-book" viewBox="0 0 16 16">
                         <path
-                            d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"
-                        ></path>
+                            d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         공부하자
                     </h2>
                 </div>
                 <div class="grid-item normal-box" onclick="controlInfoBox(7)">
-                    <br /><br />
-                    <svg
-                        id="svg7"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-search-heart"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg7" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-search-heart" viewBox="0 0 16 16">
+                        <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"></path>
                         <path
-                            d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"
-                        ></path>
-                        <path
-                            d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"
-                        ></path>
+                            d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         교양과목
@@ -1062,23 +936,17 @@
                     <h2 class="grid-title">찾기</h2>
                 </div>
                 <div class="grid-item normal-box" onclick="controlInfoBox(8)">
-                    <br /><br />
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-heart-pulse"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray" class="svg bi bi-heart-pulse"
+                        viewBox="0 0 16 16">
                         <path
-                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Z"
-                        ></path>
+                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Z">
+                        </path>
                         <path
-                            d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z"
-                        ></path>
+                            d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z">
+                        </path>
                     </svg>
-                    <h2 class="grid-title">심리진로<br />건강군복무상담</h2>
+                    <h2 class="grid-title">심리진로<br>건강군복무상담</h2>
                 </div>
             </div>
             <div class="largebox">
@@ -1094,14 +962,10 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >수강신청에 관한 정보들을 확인할 수 있습니다. 수강신청을
-                                        처음 하는 신입생들은 잘 살펴두어야 합니다.</span
-                                    >
+                                    <span>수강신청에 관한 정보들을 확인할 수 있습니다. 수강신청을
+                                        처음 하는 신입생들은 잘 살펴두어야 합니다.</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/haksa/soogang.html"
-                                    >🔗관련 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/haksa/soogang.html">🔗관련 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -1114,15 +978,10 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >실제로 수강신청이 이루어지는 홈페이지입니다. 수강신청과
-                                        관련된 주의사항들도 함께 확인할 수 있습니다.</span
-                                    >
+                                    <span>실제로 수강신청이 이루어지는 홈페이지입니다. 수강신청과
+                                        관련된 주의사항들도 함께 확인할 수 있습니다.</span>
                                 </div>
-                                <a
-                                    href="http://sis109.sogang.ac.kr/sap/bc/bsp/sap/zcm001/default.htm"
-                                    >🔗수강신청 링크</a
-                                >
+                                <a href="http://sis109.sogang.ac.kr/sap/bc/bsp/sap/zcm001/default.htm">🔗수강신청 링크</a>
                             </div>
                         </div>
                     </div>
@@ -1139,43 +998,30 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230211_2344_5410001.png"
-                                        class="txc-image"
-                                        alt="지도사진_로욜라_도서관"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="지도사진_로욜라_도서관" loading="lazy">
                                 </div>
                                 <div>
-                                    <span
-                                        >로욜라 도서관을 이용하는데 필요한 모든 정보를 확인할 수
+                                    <span>로욜라 도서관을 이용하는데 필요한 모든 정보를 확인할 수
                                         있습니다.
-                                        <br />
+                                        <br>
                                         TEL: 02-705-8191
                                     </span>
                                 </div>
                             </div>
-                            <br />
+                            <br>
                             <table width="100%">
                                 <thead></thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <div
-                                                onclick="document.location.href='https://library.sogang.ac.kr/'"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="64"
-                                                    height="64"
-                                                    fill="currentColor"
-                                                    class="bi bi-house"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                            <div onclick="document.location.href='https://library.sogang.ac.kr/'">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
+                                                    fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
                                                     <path
-                                                        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"
-                                                    ></path>
+                                                        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z">
+                                                    </path>
                                                 </svg>
 
                                                 <h2 class="fw-normal">홈페이지</h2>
@@ -1186,20 +1032,12 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div
-                                                onclick="document.location.href='https://www.instagram.com/loyolasogang/'"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="64"
-                                                    height="64"
-                                                    fill="currentColor"
-                                                    class="bi bi-instagram"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                            <div onclick="document.location.href='https://www.instagram.com/loyolasogang/'">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
+                                                    fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
                                                     <path
-                                                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
-                                                    ></path>
+                                                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z">
+                                                    </path>
                                                 </svg>
 
                                                 <h2 class="fw-normal">로욜라 인스타</h2>
@@ -1210,19 +1048,12 @@
                                         </td>
                                         <td>
                                             <div
-                                                onclick="document.location.href='https://www.youtube.com/channel/UCuPsJDe7dZ5Ix1ZisqwG3Lw/featured'"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="64"
-                                                    height="64"
-                                                    fill="currentColor"
-                                                    class="bi bi-youtube"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                                onclick="document.location.href='https://www.youtube.com/channel/UCuPsJDe7dZ5Ix1ZisqwG3Lw/featured'">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"
+                                                    fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
                                                     <path
-                                                        d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"
-                                                    ></path>
+                                                        d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z">
+                                                    </path>
                                                 </svg>
 
                                                 <h2 class="fw-normal">로욜라 YOUTUBE</h2>
@@ -1245,21 +1076,15 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230211_2344_5410003.png"
-                                        class="txc-image"
-                                        alt="지도사진_교수학습센터"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="지도사진_교수학습센터" loading="lazy">
                                 </div>
                                 <div>
-                                    <span
-                                        >대학교에서의 원활한 학습을 위한 다양한 프로그램을
+                                    <span>대학교에서의 원활한 학습을 위한 다양한 프로그램을
                                         진행합니다. 대학교 강의에 적합한 자신만의 학습법을 찾을 수
-                                        있습니다. <br />
-                                        TEL: 02-705-7915</span
-                                    >
+                                        있습니다. <br>
+                                        TEL: 02-705-7915</span>
                                 </div>
                                 <a href="http://www.sogang.ac.kr/bachelor/">🔗교수학습센터 링크</a>
                             </div>
@@ -1274,20 +1099,14 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230211_2347_4510001.png"
-                                        class="txc-image"
-                                        alt="지도사진_글쓰기_센터"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="지도사진_글쓰기_센터" loading="lazy">
                                 </div>
                                 <div>
-                                    <span
-                                        >독후감, 보고서, 서술형 답안지 등 대학생활에서 글을 쓰는
+                                    <span>독후감, 보고서, 서술형 답안지 등 대학생활에서 글을 쓰는
                                         능력은 필수입니다. 글쓰기 능력과 논리력 함양을 지원합니다.
-                                        <br />TEL: 02-705-4758</span
-                                    >
+                                        <br>TEL: 02-705-4758</span>
                                 </div>
                                 <a href="http://www.sogang.ac.kr/bachelor/">🔗글쓰기센터 링크</a>
                             </div>
@@ -1302,19 +1121,13 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >모바일 학생증 앱 우측 상단의 버튼(≡)을 클릭하여 열람실
-                                        좌석현황을 살펴볼 수 있습니다.</span
-                                    >
+                                    <span>모바일 학생증 앱 우측 상단의 버튼(≡)을 클릭하여 열람실
+                                        좌석현황을 살펴볼 수 있습니다.</span>
                                 </div>
+                                <a href="https://play.google.com/store/apps/details?id=net.wise.sgu">
+                                    📥Android 다운로드</a>
                                 <a
-                                    href="https://play.google.com/store/apps/details?id=net.wise.sgu"
-                                >
-                                    📥Android 다운로드</a
-                                >
-                                <a
-                                    href="https://apps.apple.com/kr/app/%EC%84%9C%EA%B0%95%EB%8C%80%ED%95%99%EA%B5%90-%EB%AA%A8%EB%B0%94%EC%9D%BC-%ED%95%99%EC%83%9D%EC%A6%9D-%EC%9D%B4%EC%9A%A9%EC%A6%9D/id1224508693"
-                                >
+                                    href="https://apps.apple.com/kr/app/%EC%84%9C%EA%B0%95%EB%8C%80%ED%95%99%EA%B5%90-%EB%AA%A8%EB%B0%94%EC%9D%BC-%ED%95%99%EC%83%9D%EC%A6%9D-%EC%9D%B4%EC%9A%A9%EC%A6%9D/id1224508693">
                                     📥IOS 다운로드
                                 </a>
                             </div>
@@ -1329,17 +1142,11 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >학습을 위하여 학교의 강의실 등 시설물을 예약 후 이용할 수
-                                        있습니다.</span
-                                    >
+                                    <span>학습을 위하여 학교의 강의실 등 시설물을 예약 후 이용할 수
+                                        있습니다.</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/students/class01.html"
-                                    >🔗강의실 예약</a
-                                >
-                                <a href="https://sogang.ac.kr/campus/b_campus02.html"
-                                    >🔗시설물 예약</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/students/class01.html">🔗강의실 예약</a>
+                                <a href="https://sogang.ac.kr/campus/b_campus02.html">🔗시설물 예약</a>
                             </div>
                         </div>
                     </div>
@@ -1358,13 +1165,11 @@
                                 <div>
                                     <span>
                                         1학년때 반드시 수강해야 합니다. 인성교육센터에 문의
-                                        하세요<br />
+                                        하세요<br>
                                         인성교육센터 TEL: 02-705-8805
                                     </span>
                                 </div>
-                                <a href="https://character.sogang.ac.kr/character/index_new.html"
-                                    >🔗인성교육센터 링크</a
-                                >
+                                <a href="https://character.sogang.ac.kr/character/index_new.html">🔗인성교육센터 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -1379,13 +1184,11 @@
                                 <div>
                                     <span>
                                         -1학년 1학기에 반드시 수강해야합니다. 학부행정실이나
-                                        전인교육원에 문의 하세요<br />
+                                        전인교육원에 문의 하세요<br>
                                         전인교육원 TEL: 02-705-8549
                                     </span>
                                 </div>
-                                <a href="https://scc.sogang.ac.kr/wholeperson/index_new.html"
-                                    >🔗전인교육원 링크</a
-                                >
+                                <a href="https://scc.sogang.ac.kr/wholeperson/index_new.html">🔗전인교육원 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -1400,24 +1203,16 @@
                                 <div>
                                     <span>
                                         -전인교육원은 서강대 교양과목을 개설하고 운영하는
-                                        부서입니다. 최양업관 2층에 있습니다.<br />
-                                        -02-705-8549<br />
-                                        -2023학년도 교양과목 요람</span
-                                    >
+                                        부서입니다. 최양업관 2층에 있습니다.<br>
+                                        -02-705-8549<br>
+                                        -2023학년도 교양과목 요람</span>
                                 </div>
-                                <a href="https://scc.sogang.ac.kr/wholeperson/index_new.html"
-                                    >전인교육원 링크</a
-                                >
+                                <a href="https://scc.sogang.ac.kr/wholeperson/index_new.html">전인교육원 링크</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div
-                    style="display: none;"
-                    id="box8"
-                    class="box"
-                    data-name="심리진로건강군복무상담"
-                >
+                <div style="display: none;" id="box8" class="box" data-name="심리진로건강군복무상담">
                     <div id="Accordion_wrap">
                         <div class="keyword big-text">
                             <span>심리 상담</span>
@@ -1429,24 +1224,16 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230211_2347_4510003.png"
-                                        class="txc-image"
-                                        alt="학생생활상담연구소"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="학생생활상담연구소" loading="lazy">
                                 </div>
                                 <div>
-                                    <span
-                                        >-학생들의 건강한 몸과 마음을 위한 다양한 상담 프로그램을
+                                    <span>-학생들의 건강한 몸과 마음을 위한 다양한 상담 프로그램을
                                         진행합니다. 고민이 있거나 힘들 때 망설이지않고 찾을 수 있는
-                                        곳입니다. <br />TEL: 02-705-8211(학생생활상담연구소)</span
-                                    >
+                                        곳입니다. <br>TEL: 02-705-8211(학생생활상담연구소)</span>
                                 </div>
-                                <a href="https://sgcounsel.sogang.ac.kr/sgcounsel/index_new.html"
-                                    >🔗학생생활상담연구소 링크</a
-                                >
+                                <a href="https://sgcounsel.sogang.ac.kr/sgcounsel/index_new.html">🔗학생생활상담연구소 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -1459,24 +1246,17 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230211_2347_4610005.png"
-                                        class="txc-image"
-                                        alt="지도사진_보건실"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="지도사진_보건실" loading="lazy">
                                 </div>
                                 <div>
-                                    <span
-                                        >-서강대생들의 건강을 책임지는 보건실입니다. 건강과 관련된
-                                        무슨 고민이든지 상담 가능합니다. <br />TEL:
+                                    <span>-서강대생들의 건강을 책임지는 보건실입니다. 건강과 관련된
+                                        무슨 고민이든지 상담 가능합니다. <br>TEL:
                                         02-705-8209(보건실)
                                     </span>
                                 </div>
-                                <a href="https://scc.sogang.ac.kr/hs/index_new.html"
-                                    >🔗보건실 링크</a
-                                >
+                                <a href="https://scc.sogang.ac.kr/hs/index_new.html">🔗보건실 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -1489,20 +1269,14 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230211_2350_1510001.png"
-                                        class="txc-image"
-                                        alt="지도사진_취업지원"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="지도사진_취업지원" loading="lazy">
                                 </div>
                                 <div>
-                                    <span
-                                        >-적성 검사부터 진로 탐색, 면접 준비까지 취업에 관한 모든
+                                    <span>-적성 검사부터 진로 탐색, 면접 준비까지 취업에 관한 모든
                                         것을 지원합니다. 인턴이나 아르바이트 등의 채용 공고도 확인
-                                        가능합니다. <br />02-705-8131(취업지원팀)</span
-                                    >
+                                        가능합니다. <br>02-705-8131(취업지원팀)</span>
                                 </div>
                                 <a href="http://job.sogang.ac.kr">🔗취업지원팀 링크</a>
                             </div>
@@ -1517,17 +1291,12 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230211_2350_1510003.png"
-                                        class="txc-image"
-                                        alt="지도사진_인권성평등_센"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="지도사진_인권성평등_센" loading="lazy">
                                 </div>
                                 <div>
-                                    <span
-                                        >-서강대 학생들의 인권과 성평등을 위해 온 마음과 정성으로
+                                    <span>-서강대 학생들의 인권과 성평등을 위해 온 마음과 정성으로
                                         지원합니다. 궁금한 점이 있을 시 언제든 문의 가능합니다.
                                     </span>
                                     <table>
@@ -1546,9 +1315,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="https://hrgec.sogang.ac.kr/hrgec/hrgec_people.html"
-                                    >🔗관련 링크</a
-                                >
+                                <a href="https://hrgec.sogang.ac.kr/hrgec/hrgec_people.html">🔗관련 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -1561,24 +1328,16 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230212_0036_4410001.png"
-                                        class="txc-image"
-                                        alt="지도사진_종합봉사실"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="지도사진_종합봉사실" loading="lazy">
                                 </div>
                                 <div>
-                                    <span
-                                        >병역의무이행과 관련된 사항들을 정리하여 제공합니다. 학교
+                                    <span>병역의무이행과 관련된 사항들을 정리하여 제공합니다. 학교
                                         측에 추가로 궁금한 사항이 있을 시 전화로 문의 가능합니다.
-                                        <br />02-705-8000(종합봉사실)</span
-                                    >
+                                        <br>02-705-8000(종합봉사실)</span>
                                 </div>
-                                <a href="https://www.sogang.ac.kr/bachelor/onestop/milt.html"
-                                    >🔗종합봉사실 링크</a
-                                >
+                                <a href="https://www.sogang.ac.kr/bachelor/onestop/milt.html">🔗종합봉사실 링크</a>
                             </div>
                         </div>
                     </div>
@@ -1588,61 +1347,37 @@
 
             <div class="grid">
                 <div class="grid-item normal-box" onclick="controlInfoBox(9)">
-                    <br /><br />
-                    <svg
-                        id="svg9"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-award-fill"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg9" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-award-fill" viewBox="0 0 16 16">
                         <path
-                            d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z"
-                        ></path>
-                        <path
-                            d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"
-                        ></path>
+                            d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z">
+                        </path>
+                        <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"></path>
                     </svg>
                     <h2 class="grid-title">
                         교내 각종 대회 참여하기
                     </h2>
                 </div>
                 <div class="grid-item normal-box" onclick="controlInfoBox(10)">
-                    <br /><br />
-                    <svg
-                        id="svg10"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-balloon-heart"
-                        viewBox="0 0 16 16"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z"
-                        ></path>
+                    <br><br>
+                    <svg id="svg10" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-balloon-heart" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         봉사활동
                     </h2>
                 </div>
                 <div class="grid-item grid-35 normal-box" onclick="controlInfoBox(11)">
-                    <br /><br />
-                    <svg
-                        id="svg11"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-binoculars"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg11" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-binoculars" viewBox="0 0 16 16">
                         <path
-                            d="M3 2.5A1.5 1.5 0 0 1 4.5 1h1A1.5 1.5 0 0 1 7 2.5V5h2V2.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5v2.382a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V14.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 14.5v-3a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5v3A1.5 1.5 0 0 1 5.5 16h-3A1.5 1.5 0 0 1 1 14.5V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V2.5zM4.5 2a.5.5 0 0 0-.5.5V3h2v-.5a.5.5 0 0 0-.5-.5h-1zM6 4H4v.882a1.5 1.5 0 0 1-.83 1.342l-.894.447A.5.5 0 0 0 2 7.118V13h4v-1.293l-.854-.853A.5.5 0 0 1 5 10.5v-1A1.5 1.5 0 0 1 6.5 8h3A1.5 1.5 0 0 1 11 9.5v1a.5.5 0 0 1-.146.354l-.854.853V13h4V7.118a.5.5 0 0 0-.276-.447l-.895-.447A1.5 1.5 0 0 1 12 4.882V4h-2v1.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V4zm4-1h2v-.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5V3zm4 11h-4v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V14zm-8 0H2v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V14z"
-                        ></path>
+                            d="M3 2.5A1.5 1.5 0 0 1 4.5 1h1A1.5 1.5 0 0 1 7 2.5V5h2V2.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5v2.382a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V14.5a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 14.5v-3a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5v3A1.5 1.5 0 0 1 5.5 16h-3A1.5 1.5 0 0 1 1 14.5V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V2.5zM4.5 2a.5.5 0 0 0-.5.5V3h2v-.5a.5.5 0 0 0-.5-.5h-1zM6 4H4v.882a1.5 1.5 0 0 1-.83 1.342l-.894.447A.5.5 0 0 0 2 7.118V13h4v-1.293l-.854-.853A.5.5 0 0 1 5 10.5v-1A1.5 1.5 0 0 1 6.5 8h3A1.5 1.5 0 0 1 11 9.5v1a.5.5 0 0 1-.146.354l-.854.853V13h4V7.118a.5.5 0 0 0-.276-.447l-.895-.447A1.5 1.5 0 0 1 12 4.882V4h-2v1.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V4zm4-1h2v-.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5V3zm4 11h-4v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V14zm-8 0H2v.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V14z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         다전공/연계전공/학생설계전공/마이크로전공
@@ -1650,12 +1385,7 @@
                 </div>
             </div>
             <div class="largebox">
-                <div
-                    style="display: none;"
-                    id="box9"
-                    class="box"
-                    data-name="교내 각종 대회 참여하기"
-                >
+                <div style="display: none;" id="box9" class="box" data-name="교내 각종 대회 참여하기">
                     <div id="Accordion_wrap">
                         <div class="keyword big-text">
                             <span>지금 진행되는 대회들</span>
@@ -1697,24 +1427,18 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
-                                        src="http://scc.sogang.ac.kr/dataview/temp/DEI20230213000221.png"
-                                        class="txc-image"
-                                        alt="지도사진_이냐시오"
-                                        loading="lazy"
-                                    />
+                                    <img style="max-width:100%!important;"
+                                        src="http://scc.sogang.ac.kr/dataview/temp/DEI20230213000221.png" class="txc-image"
+                                        alt="지도사진_이냐시오" loading="lazy">
                                 </div>
                                 <div>
                                     <span>
                                         예수회의 정신으로 봉사를 비롯한 다양한 활동 및 프로그램을
                                         운영합니다.
-                                        <br />02-705-8942(이냐시오인재센터)
+                                        <br>02-705-8942(이냐시오인재센터)
                                     </span>
                                 </div>
-                                <a href="https://voluntas.sogang.ac.kr/voluntas/index_new.html"
-                                    >🔗이냐시오인재센터 링크</a
-                                >
+                                <a href="https://voluntas.sogang.ac.kr/voluntas/index_new.html">🔗이냐시오인재센터 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -1727,34 +1451,23 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230212_0036_4510004.png"
-                                        class="txc-image"
-                                        alt="지도사진_장애학생지원센터"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="지도사진_장애학생지원센터" loading="lazy">
                                 </div>
                                 <div>
                                     <span>
                                         서강대생들의 참여를 통해 장애학생들에게 원활한 학습기회를
                                         제공합니다.
-                                        <br />02-705-7800(장애학생지원센터)
+                                        <br>02-705-7800(장애학생지원센터)
                                     </span>
                                 </div>
-                                <a href="https://dasoni.sogang.ac.kr/dasoni/index_new.html"
-                                    >🔗장애학생지원센터 링크</a
-                                >
+                                <a href="https://dasoni.sogang.ac.kr/dasoni/index_new.html">🔗장애학생지원센터 링크</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div
-                    style="display: none;"
-                    id="box11"
-                    class="box"
-                    data-name="다전공/연계전공/학생설계전공/마이크로전공"
-                >
+                <div style="display: none;" id="box11" class="box" data-name="다전공/연계전공/학생설계전공/마이크로전공">
                     <div id="Accordion_wrap">
                         <div class="keyword big-text">
                             <span>다전공 제도</span>
@@ -1766,15 +1479,12 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >학생들은 전공을 계열, 모집단위, 인원, 성적 등에 제한 없이
+                                    <span>학생들은 전공을 계열, 모집단위, 인원, 성적 등에 제한 없이
                                         1∼3개까지 선택할 수 있습니다. 다양한 학습을 통해 적성에 맞는
                                         전공을 선택할 수 있습니다.
                                     </span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/haksa/course02.html"
-                                    >🔗관련 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/haksa/course02.html">🔗관련 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -1787,10 +1497,8 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >본인의 전공을 신청하고 변경이 가능하지만, 요건을
-                                        충족해야하므로 확인이 필요합니다.</span
-                                    >
+                                    <span>본인의 전공을 신청하고 변경이 가능하지만, 요건을
+                                        충족해야하므로 확인이 필요합니다.</span>
                                 </div>
                                 <a href="http://www.sogang.ac.kr/bachelor/">🔗관련 링크</a>
                             </div>
@@ -1805,14 +1513,10 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >두 가지 이상의 전공을 연계 하여 교과 과정을 구성, 하나의
-                                        전공으로 제공하는 새로운 교육제도입니다.</span
-                                    >
+                                    <span>두 가지 이상의 전공을 연계 하여 교과 과정을 구성, 하나의
+                                        전공으로 제공하는 새로운 교육제도입니다.</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/haksa/course04.html"
-                                    >🔗관련 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/haksa/course04.html">🔗관련 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -1825,10 +1529,8 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >5년 동안의 과정을 통해 학사와 석사 학위를 동시에 취득하는
-                                        과정입니다. 대학원 진학 시 다양한 혜택이 제공됩니다.</span
-                                    >
+                                    <span>5년 동안의 과정을 통해 학사와 석사 학위를 동시에 취득하는
+                                        과정입니다. 대학원 진학 시 다양한 혜택이 제공됩니다.</span>
                                 </div>
                                 <a href="http://www.sogang.ac.kr/bachelor/">🔗관련 링크</a>
                             </div>
@@ -1843,14 +1545,10 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >학생이 스스로 교육과정을 구성하여 학교의 인정을 받은 후
-                                        전공을 이수하게 되는 새로운 개념의 전공과정입니다.</span
-                                    >
+                                    <span>학생이 스스로 교육과정을 구성하여 학교의 인정을 받은 후
+                                        전공을 이수하게 되는 새로운 개념의 전공과정입니다.</span>
                                 </div>
-                                <a href="https://sogang.ac.kr/bachelor/haksa/course05.html"
-                                    >🔗관련 링크</a
-                                >
+                                <a href="https://sogang.ac.kr/bachelor/haksa/course05.html">🔗관련 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -1863,12 +1561,10 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >다전공 제도의 요건을 완화하여 최소 12학점 이상만 이수하면
+                                    <span>다전공 제도의 요건을 완화하여 최소 12학점 이상만 이수하면
                                         마이크로전공을 이수한 것으로 인정되는 제도입니다. 보다 쉽게
                                         타 전공 과목을 수강함으로써 다양한 학문을 습득할 수
-                                        있습니다.</span
-                                    >
+                                        있습니다.</span>
                                 </div>
                                 <a href="https://convedu.sogang.ac.kr/convedu/conv05_1.html">
                                     🔗관련 링크
@@ -1885,13 +1581,9 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230212_0038_1310001.png"
-                                        class="txc-image"
-                                        alt="융합교육원"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="융합교육원" loading="lazy">
                                 </div>
                                 <div>
                                     <span>TEL: 02-705-8664(학사지원팀)</span>
@@ -1906,80 +1598,52 @@
 
             <div class="grid">
                 <div class="grid-item normal-box" onclick="controlInfoBox(12)">
-                    <br /><br />
-                    <svg
-                        id="svg12"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-airplane-fill"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg12" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-airplane-fill" viewBox="0 0 16 16">
                         <path
-                            d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"
-                        ></path>
+                            d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         교환학생
                     </h2>
                 </div>
                 <div class="grid-item normal-box" onclick="controlInfoBox(13)">
-                    <br /><br />
-                    <svg
-                        id="svg13"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-globe-asia-australia"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg13" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-globe-asia-australia" viewBox="0 0 16 16">
                         <path
-                            d="m10.495 6.92 1.278-.619a.483.483 0 0 0 .126-.782c-.252-.244-.682-.139-.932.107-.23.226-.513.373-.816.53l-.102.054c-.338.178-.264.626.1.736a.476.476 0 0 0 .346-.027ZM7.741 9.808V9.78a.413.413 0 1 1 .783.183l-.22.443a.602.602 0 0 1-.12.167l-.193.185a.36.36 0 1 1-.5-.516l.112-.108a.453.453 0 0 0 .138-.326ZM5.672 12.5l.482.233A.386.386 0 1 0 6.32 12h-.416a.702.702 0 0 1-.419-.139l-.277-.206a.302.302 0 1 0-.298.52l.761.325Z"
-                        ></path>
+                            d="m10.495 6.92 1.278-.619a.483.483 0 0 0 .126-.782c-.252-.244-.682-.139-.932.107-.23.226-.513.373-.816.53l-.102.054c-.338.178-.264.626.1.736a.476.476 0 0 0 .346-.027ZM7.741 9.808V9.78a.413.413 0 1 1 .783.183l-.22.443a.602.602 0 0 1-.12.167l-.193.185a.36.36 0 1 1-.5-.516l.112-.108a.453.453 0 0 0 .138-.326ZM5.672 12.5l.482.233A.386.386 0 1 0 6.32 12h-.416a.702.702 0 0 1-.419-.139l-.277-.206a.302.302 0 1 0-.298.52l.761.325Z">
+                        </path>
                         <path
-                            d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1.612 10.867l.756-1.288a1 1 0 0 1 1.545-.225l1.074 1.005a.986.986 0 0 0 1.36-.011l.038-.037a.882.882 0 0 0 .26-.755c-.075-.548.37-1.033.92-1.099.728-.086 1.587-.324 1.728-.957.086-.386-.114-.83-.361-1.2-.207-.312 0-.8.374-.8.123 0 .24-.055.318-.15l.393-.474c.196-.237.491-.368.797-.403.554-.064 1.407-.277 1.583-.973.098-.391-.192-.634-.484-.88-.254-.212-.51-.426-.515-.741a6.998 6.998 0 0 1 3.425 7.692 1.015 1.015 0 0 0-.087-.063l-.316-.204a1 1 0 0 0-.977-.06l-.169.082a1 1 0 0 1-.741.051l-1.021-.329A1 1 0 0 0 11.205 9h-.165a1 1 0 0 0-.945.674l-.172.499a1 1 0 0 1-.404.514l-.802.518a1 1 0 0 0-.458.84v.455a1 1 0 0 0 1 1h.257a1 1 0 0 1 .542.16l.762.49a.998.998 0 0 0 .283.126 7.001 7.001 0 0 1-9.49-3.409Z"
-                        ></path>
+                            d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0ZM1.612 10.867l.756-1.288a1 1 0 0 1 1.545-.225l1.074 1.005a.986.986 0 0 0 1.36-.011l.038-.037a.882.882 0 0 0 .26-.755c-.075-.548.37-1.033.92-1.099.728-.086 1.587-.324 1.728-.957.086-.386-.114-.83-.361-1.2-.207-.312 0-.8.374-.8.123 0 .24-.055.318-.15l.393-.474c.196-.237.491-.368.797-.403.554-.064 1.407-.277 1.583-.973.098-.391-.192-.634-.484-.88-.254-.212-.51-.426-.515-.741a6.998 6.998 0 0 1 3.425 7.692 1.015 1.015 0 0 0-.087-.063l-.316-.204a1 1 0 0 0-.977-.06l-.169.082a1 1 0 0 1-.741.051l-1.021-.329A1 1 0 0 0 11.205 9h-.165a1 1 0 0 0-.945.674l-.172.499a1 1 0 0 1-.404.514l-.802.518a1 1 0 0 0-.458.84v.455a1 1 0 0 0 1 1h.257a1 1 0 0 1 .542.16l.762.49a.998.998 0 0 0 .283.126 7.001 7.001 0 0 1-9.49-3.409Z">
+                        </path>
                     </svg>
-                    <h2 class="grid-title">국제학생용<br />(ENG/中文)</h2>
+                    <h2 class="grid-title">국제학생용<br>(ENG/中文)</h2>
                 </div>
                 <div class="grid-item normal-box" onclick="controlInfoBox(14)">
-                    <br /><br />
-                    <svg
-                        id="svg14"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-chat-left-dots"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg14" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-chat-left-dots" viewBox="0 0 16 16">
                         <path
-                            d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"
-                        ></path>
+                            d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z">
+                        </path>
                         <path
-                            d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
-                        ></path>
+                            d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         커뮤니티
                     </h2>
                 </div>
                 <div class="grid-item normal-box" onclick="controlInfoBox(15)">
-                    <br /><br />
-                    <svg
-                        id="svg15"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-people"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg15" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-people" viewBox="0 0 16 16">
                         <path
-                            d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"
-                        ></path>
+                            d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         단체활동
@@ -1999,25 +1663,17 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230212_0036_4510007.png"
-                                        class="txc-image"
-                                        alt="국제팀"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="국제팀" loading="lazy">
                                 </div>
                                 <div>
-                                    <span
-                                        >교환학생, 유학 등 해외에서 꿈을 펼치고자 하는 서강대
+                                    <span>교환학생, 유학 등 해외에서 꿈을 펼치고자 하는 서강대
                                         학생들을 지원합니다. 대학생일 때만 가능한 기회에 도전해
                                         보십시오. TEL: 02-705-8118(국제팀)
                                     </span>
                                 </div>
-                                <a
-                                    href="http://goabroad.sogang.ac.kr/enter/html/outbound/notice.asp"
-                                    >🔗국제팀 링크</a
-                                >
+                                <a href="http://goabroad.sogang.ac.kr/enter/html/outbound/notice.asp">🔗국제팀 링크</a>
                             </div>
                         </div>
                     </div>
@@ -2035,15 +1691,13 @@
                             <div>
                                 <div>
                                     <span>support for Interantioal Students</span>
-                                    <br />
+                                    <br>
                                     <span>国际学生中心</span>
                                 </div>
-                                <a href="http://oia.sogang.ac.kr/enter/html/main/intro.asp"
-                                    >Office of Interantioal Affairs Link</a
-                                ><br />
-                                <a href="https://globaledu.sogang.ac.kr/globaledu/index_new.html"
-                                    >Education Center for International Students Link</a
-                                >
+                                <a href="http://oia.sogang.ac.kr/enter/html/main/intro.asp">Office of Interantioal Affairs
+                                    Link</a><br>
+                                <a href="https://globaledu.sogang.ac.kr/globaledu/index_new.html">Education Center for
+                                    International Students Link</a>
                             </div>
                         </div>
                     </div>
@@ -2060,12 +1714,10 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >3만명의 서강대생들이 이용하는 서강대 최대 규모의
+                                    <span>3만명의 서강대생들이 이용하는 서강대 최대 규모의
                                         커뮤니티입니다. 익명, 반말, 질문 등 다양한 유형의 대화를
                                         나눌 수 있는 온라인 공간입니다. 가입을 위하여 서강대 웹메일
-                                        계정이 필요합니다.</span
-                                    >
+                                        계정이 필요합니다.</span>
                                 </div>
                                 <a href="http://www.ssodam.com/">🔗서담으로 이동하기</a>
                             </div>
@@ -2083,8 +1735,7 @@
                                     <span>서강대학교의 페이스북 계정입니다.</span>
                                 </div>
                                 <a href="https://www.facebook.com/groups/183113885042540/">
-                                    🔗페이스북 계정으로 바로가기</a
-                                >
+                                    🔗페이스북 계정으로 바로가기</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -2099,11 +1750,8 @@
                                 <div>
                                     <span>서강대학교의 인스타그램 계정입니다.</span>
                                 </div>
-                                <a
-                                    href="https://www.instagram.com/sogang_university/?igshid=YmMyMTA2M2Y%3D"
-                                >
-                                    🔗인스타그램 계정으로 바로가기</a
-                                >
+                                <a href="https://www.instagram.com/sogang_university/?igshid=YmMyMTA2M2Y%3D">
+                                    🔗인스타그램 계정으로 바로가기</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -2116,15 +1764,11 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >서강대학교 학생들을 위한 다양한 소식들이 올라오는
+                                    <span>서강대학교 학생들을 위한 다양한 소식들이 올라오는
                                         공간입니다. 총학생회, 동아리, 대학언론, 고시반, 학회,
-                                        조교모집 등에 대한 정보 획득에 유용합니다.</span
-                                    >
+                                        조교모집 등에 대한 정보 획득에 유용합니다.</span>
                                 </div>
-                                <a href="https://sc.sogang.ac.kr/soriindex.do"
-                                    >🔗청년광장 바로가기</a
-                                >
+                                <a href="https://sc.sogang.ac.kr/soriindex.do">🔗청년광장 바로가기</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -2137,20 +1781,14 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >대학생들을 위한 커뮤니티 앱인 '에브리타임'에서 서강대학교
+                                    <span>대학생들을 위한 커뮤니티 앱인 '에브리타임'에서 서강대학교
                                         학생들과 교류를 할 수 있습니다. 가입을 위해 서강대 웹메일
-                                        계정이 필요합니다.</span
-                                    >
+                                        계정이 필요합니다.</span>
                                 </div>
+                                <a href="https://play.google.com/store/apps/details?id=com.everytime.v2">
+                                    📥Android 다운로드</a><br>
                                 <a
-                                    href="https://play.google.com/store/apps/details?id=com.everytime.v2"
-                                >
-                                    📥Android 다운로드</a
-                                ><br />
-                                <a
-                                    href="https://apps.apple.com/kr/app/%EC%97%90%EB%B8%8C%EB%A6%AC%ED%83%80%EC%9E%84/id642416310"
-                                >
+                                    href="https://apps.apple.com/kr/app/%EC%97%90%EB%B8%8C%EB%A6%AC%ED%83%80%EC%9E%84/id642416310">
                                     📥IOS 다운로드
                                 </a>
                             </div>
@@ -2173,12 +1811,10 @@
                                         총학생회 활동을 통해 서강대학교와 학생들을 위한 헌신과
                                         열정을 마음껏 불태울 수 있습니다. 총학생회 뿐만 아니라 각
                                         단과대에도 학생회가 존재합니다.
-                                        <br />TEL: 02-705-8260
+                                        <br>TEL: 02-705-8260
                                     </span>
                                 </div>
-                                <a href="https://www.sogang.ac.kr/campus/b_club01.html"
-                                    >🔗총학생회 링크</a
-                                >
+                                <a href="https://www.sogang.ac.kr/campus/b_club01.html">🔗총학생회 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -2191,15 +1827,12 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >대학 생활의 꽃이라 할 수 있는 동아리에서 청춘을 마음껏
+                                    <span>대학 생활의 꽃이라 할 수 있는 동아리에서 청춘을 마음껏
                                         펼치십시오. 수많은 동아리들을 통해 취향에 맞는 활동이
                                         가능합니다.
                                     </span>
                                 </div>
-                                <a href="https://www.sogang.ac.kr/campus/b_club03.html"
-                                    >🔗동아리 링크</a
-                                >
+                                <a href="https://www.sogang.ac.kr/campus/b_club03.html">🔗동아리 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -2212,14 +1845,10 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >교내의 신문사 및 방송사를 통해 언론활동을 체험해 볼 수
-                                        있습니다.</span
-                                    >
+                                    <span>교내의 신문사 및 방송사를 통해 언론활동을 체험해 볼 수
+                                        있습니다.</span>
                                 </div>
-                                <a href="https://www.sogang.ac.kr/campus/b_club02.html"
-                                    >🔗학생언론 링크</a
-                                >
+                                <a href="https://www.sogang.ac.kr/campus/b_club02.html">🔗학생언론 링크</a>
                             </div>
                         </div>
                         <div class="keyword big-text">
@@ -2232,15 +1861,11 @@
                         <div class="content">
                             <div class="container-sm">
                                 <div>
-                                    <span
-                                        >서강대학교 학생홍보대사인 '하늬가람' 활동을 통해
-                                        서강대학교를 대표하는 얼굴이 되어보십시오. <br />TEL:
-                                        02-705-8618(발전홍보팀)</span
-                                    >
+                                    <span>서강대학교 학생홍보대사인 '하늬가람' 활동을 통해
+                                        서강대학교를 대표하는 얼굴이 되어보십시오. <br>TEL:
+                                        02-705-8618(발전홍보팀)</span>
                                 </div>
-                                <a href="https://hanigaram.sogang.ac.kr/hanigaram/index_new.html"
-                                    >🔗하늬가람 홈페이지</a
-                                >
+                                <a href="https://hanigaram.sogang.ac.kr/hanigaram/index_new.html">🔗하늬가람 홈페이지</a>
                             </div>
                         </div>
                     </div>
@@ -2250,45 +1875,28 @@
 
             <div class="grid">
                 <div class="grid-item grid-13 normal-box" onclick="controlInfoBox(16)">
-                    <br /><br />
-                    <svg
-                        id="svg16"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="64"
-                        height="64"
-                        fill="gray"
-                        class="svg bi bi-building"
-                        viewBox="0 0 16 16"
-                    >
+                    <br><br>
+                    <svg id="svg16" xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                        class="svg bi bi-building" viewBox="0 0 16 16">
                         <path
-                            d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"
-                        ></path>
+                            d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z">
+                        </path>
                         <path
-                            d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z"
-                        ></path>
+                            d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V1Zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3V1Z">
+                        </path>
                     </svg>
                     <h2 class="grid-title">
                         캠퍼스맵/편의시설
                     </h2>
                 </div>
-                <a
-                    href="http://www.sogang.ac.kr/index.do"
-                    style="text-decoration-line: none;"
-                    class="grid-35"
-                >
-                    <div class="grid-item normal-box">
-                        <br /><br />
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="64"
-                            height="64"
-                            fill="gray"
-                            class="bi bi-house"
-                            viewBox="0 0 16 16"
-                        >
+                <a href="http://www.sogang.ac.kr/index.do" style="text-decoration-line: none;" class="grid-35">
+                    <div class="grid-item normal-box" >
+                        <br><br>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray" class="bi bi-house"
+                            viewBox="0 0 16 16">
                             <path
-                                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"
-                            ></path>
+                                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z">
+                            </path>
                         </svg>
                         <h2 class="grid-title">
                             학교 메인 홈페이지
@@ -2309,13 +1917,9 @@
                         <div class="content">
                             <div>
                                 <div class="img-container">
-                                    <img
-                                        style="max-width: 100% !important;"
+                                    <img style="max-width:100%!important;"
                                         src="http://scc.sogang.ac.kr/dataview/cmsdir/20230212_0040_4810001.png"
-                                        class="txc-image"
-                                        alt="서강대학교 지도"
-                                        loading="lazy"
-                                    />
+                                        class="txc-image" alt="서강대학교 지도" loading="lazy">
                                 </div>
                             </div>
                         </div>
@@ -2329,10 +1933,8 @@
                         <div class="content">
                             <div>
                                 <div>
-                                    <span
-                                        >학교 내 주요 시설들에 대한 목록들과 위치, 전화번호가
-                                        정리되어 있습니다.</span
-                                    >
+                                    <span>학교 내 주요 시설들에 대한 목록들과 위치, 전화번호가
+                                        정리되어 있습니다.</span>
                                 </div>
                                 <a href="https://sogang.ac.kr/campus/b_campus.html">🔗관련 링크</a>
                             </div>
@@ -2343,23 +1945,14 @@
             <!-- ### 5열 끝 ### -->
 
             <div class="grid">
-                <a
-                    href="https://sogang.ac.kr/bachelor/b_bulletin.html"
-                    style="text-decoration-line: none;"
-                >
+                <a href="https://sogang.ac.kr/bachelor/b_bulletin.html" style="text-decoration-line: none;">
                     <div class="grid-item normal-box">
-                        <br /><br />
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="64"
-                            height="64"
-                            fill="gray"
-                            class="bi bi-house"
-                            viewBox="0 0 16 16"
-                        >
+                        <br><br>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray" class="bi bi-house"
+                            viewBox="0 0 16 16">
                             <path
-                                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"
-                            ></path>
+                                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z">
+                            </path>
                         </svg>
                         <h2 class="grid-title">
                             요람
@@ -2368,73 +1961,47 @@
                 </a>
                 <a href="http://saint.sogang.ac.kr/irj/portal" style="text-decoration-line: none;">
                     <div class="grid-item normal-box">
-                        <br /><br />
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="64"
-                            height="64"
-                            fill="gray"
-                            class="bi bi-exclamation-circle"
-                            viewBox="0 0 16 16"
-                        >
+                        <br><br>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                            class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                             <path
-                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                            />
-                            <path
-                                d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"
-                            />
+                                d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
                         </svg>
                         <h2 class="grid-title">
                             SAINT
                         </h2>
                     </div>
                 </a>
-                <a
-                    class="grid-35"
-                    href="https://eclass.sogang.ac.kr/ilos/main/main_form.acl"
-                    style="text-decoration-line: none;"
-                >
-                    <div class="grid-item normal-box">
-                        <br /><br />
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="64"
-                            height="64"
-                            fill="gray"
-                            class="bi bi-pc-display-horizontal"
-                            viewBox="0 0 16 16"
-                        >
+                <a class="grid-35" href="https://eclass.sogang.ac.kr/ilos/main/main_form.acl"
+                    style="text-decoration-line: none;">
+                    <div class="grid-item normal-box" >
+                        <br><br>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray"
+                            class="bi bi-pc-display-horizontal" viewBox="0 0 16 16">
                             <path
-                                d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0h-13Zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5ZM12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0Zm2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0ZM1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1ZM1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25Z"
-                            />
+                                d="M1.5 0A1.5 1.5 0 0 0 0 1.5v7A1.5 1.5 0 0 0 1.5 10H6v1H1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5v-1h4.5A1.5 1.5 0 0 0 16 8.5v-7A1.5 1.5 0 0 0 14.5 0h-13Zm0 1h13a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5ZM12 12.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0Zm2 0a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0ZM1.5 12h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1ZM1 14.25a.25.25 0 0 1 .25-.25h5.5a.25.25 0 1 1 0 .5h-5.5a.25.25 0 0 1-.25-.25Z" />
                         </svg>
                         <h2 class="grid-title">
                             사이버 캠퍼스
                         </h2>
                     </div>
                 </a>
+
             </div>
             <!-- ### 6열 끝 ### -->
 
             <div class="grid">
-                <a
-                    class="grid-13"
+                <a class="grid-13"
                     href="http://sis109.sogang.ac.kr/sap/bc/webdynpro/sap/zcmw9016?sap-language=KO&amp;sap-cssurl=http%3a%2f%2fsaint.sogang.ac.kr%3a80%2fcom.sap.portal.design.urdesigndata%2fthemes%2fportal%2fcustom_tradeshow_01%2fls%2fls_sf3.css%3fv%3d10.30.7.261448.1491647873000#%20%3Chttp://sis109.sogang.ac.kr/sap/bc/webdynpro/sap/zcmw9016?sap-language=KO&amp;sap-cssurl=http://saint.sogang.ac.kr:80/com.sap.portal.design.urdesign"
-                    style="text-decoration-line: none;"
-                >
+                    style="text-decoration-line: none;">
                     <div class="grid-item normal-box">
-                        <br /><br />
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="64"
-                            height="64"
-                            fill="gray"
-                            class="bi bi-house"
-                            viewBox="0 0 16 16"
-                        >
+                        <br><br>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="gray" class="bi bi-house"
+                            viewBox="0 0 16 16">
                             <path
-                                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"
-                            ></path>
+                                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z">
+                            </path>
                         </svg>
                         <h2 class="grid-title">
                             개설교과목 정보
@@ -2458,32 +2025,23 @@
                                     <td>
                                         <div style="float: left;">
                                             <div style="display: inline;" onclick="moveUrl(0)">
-                                                <svg
-                                                    class="link_svg icon"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                                <svg class="link_svg icon" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor" viewBox="0 0 16 16">
                                                     <path
-                                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"
-                                                    ></path>
+                                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z">
+                                                    </path>
                                                     <path
-                                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"
-                                                    ></path>
+                                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z">
+                                                    </path>
                                                 </svg>
                                             </div>
                                             <div style="display: inline;" onclick="controlForm(0)">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="24"
-                                                    height="48"
-                                                    fill="currentColor"
-                                                    class="bi bi-three-dots-vertical"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="48"
+                                                    fill="currentColor" class="bi bi-three-dots-vertical"
+                                                    viewBox="0 0 16 16">
                                                     <path
-                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                                                    ></path>
+                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z">
+                                                    </path>
                                                 </svg>
                                             </div>
                                         </div>
@@ -2492,32 +2050,23 @@
                                     <td>
                                         <div style="float: left;">
                                             <div style="display: inline;" onclick="moveUrl(1)">
-                                                <svg
-                                                    class="link_svg icon"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                                <svg class="link_svg icon" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor" viewBox="0 0 16 16">
                                                     <path
-                                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"
-                                                    ></path>
+                                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z">
+                                                    </path>
                                                     <path
-                                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"
-                                                    ></path>
+                                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z">
+                                                    </path>
                                                 </svg>
                                             </div>
                                             <div style="display: inline;" onclick="controlForm(1)">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="24"
-                                                    height="48"
-                                                    fill="currentColor"
-                                                    class="bi bi-three-dots-vertical"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="48"
+                                                    fill="currentColor" class="bi bi-three-dots-vertical"
+                                                    viewBox="0 0 16 16">
                                                     <path
-                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                                                    ></path>
+                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z">
+                                                    </path>
                                                 </svg>
                                             </div>
                                         </div>
@@ -2525,32 +2074,23 @@
                                     <td>
                                         <div style="float: left;">
                                             <div style="display: inline;" onclick="moveUrl(2)">
-                                                <svg
-                                                    class="link_svg icon"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                                <svg class="link_svg icon" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor" viewBox="0 0 16 16">
                                                     <path
-                                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"
-                                                    ></path>
+                                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z">
+                                                    </path>
                                                     <path
-                                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"
-                                                    ></path>
+                                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z">
+                                                    </path>
                                                 </svg>
                                             </div>
                                             <div style="display: inline;" onclick="controlForm(2)">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="24"
-                                                    height="48"
-                                                    fill="currentColor"
-                                                    class="bi bi-three-dots-vertical"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="48"
+                                                    fill="currentColor" class="bi bi-three-dots-vertical"
+                                                    viewBox="0 0 16 16">
                                                     <path
-                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                                                    ></path>
+                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z">
+                                                    </path>
                                                 </svg>
                                             </div>
                                         </div>
@@ -2558,32 +2098,23 @@
                                     <td>
                                         <div style="float: left;">
                                             <div style="display: inline;" onclick="moveUrl(3)">
-                                                <svg
-                                                    class="link_svg icon"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                                <svg class="link_svg icon" xmlns="http://www.w3.org/2000/svg"
+                                                    fill="currentColor" viewBox="0 0 16 16">
                                                     <path
-                                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"
-                                                    ></path>
+                                                        d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z">
+                                                    </path>
                                                     <path
-                                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"
-                                                    ></path>
+                                                        d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z">
+                                                    </path>
                                                 </svg>
                                             </div>
                                             <div style="display: inline;" onclick="controlForm(3)">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="24"
-                                                    height="48"
-                                                    fill="currentColor"
-                                                    class="bi bi-three-dots-vertical"
-                                                    viewBox="0 0 16 16"
-                                                >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="48"
+                                                    fill="currentColor" class="bi bi-three-dots-vertical"
+                                                    viewBox="0 0 16 16">
                                                     <path
-                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"
-                                                    ></path>
+                                                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z">
+                                                    </path>
                                                 </svg>
                                             </div>
                                         </div>
@@ -2618,117 +2149,50 @@
                             </tr> -->
                             </tbody>
                         </table>
-                        <div
-                            id="urlForm"
-                            style="
-                                background-color: #a3a3a3;
-                                border-radius: 10px;
-                                font-size: 1.2rem;
-                                width: 360px;
-                                display: none;
-                                text-align: center;
-                            "
-                        >
+                        <div id="urlForm"
+                            style="background-color: #a3a3a3; border-radius: 10px; font-size:1.2rem; width:360px; display: none; text-align: center;">
                             <div style="margin-top: 20px; text-align: center;">
                                 <label for="url">바로가기 설정할 URL을 입력해주세요</label>
-                                <svg
-                                    onclick="closeForm()"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="20"
-                                    height="20"
-                                    fill="red"
-                                    class="bi bi-x-square"
-                                    viewBox="0 0 16 16"
-                                >
+                                <svg onclick="closeForm()" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                    fill="red" class="bi bi-x-square" viewBox="0 0 16 16">
                                     <path
-                                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"
-                                    />
+                                        d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                                     <path
-                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
-                                    />
+                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                                 </svg>
                             </div>
                             <div style="margin-top: 20px; text-align: center;">
                                 <input hidden id="num" value="" style="width: 300px;" />
-                                <input
-                                    type="text"
-                                    placeholder="설정할 이름"
-                                    id="url_name"
-                                    name="url_name"
-                                    required
-                                    minlength="1"
+                                <input type="text" placeholder="설정할 이름" id="url_name" name="url_name" required minlength="1"
                                     maxlength="6"
-                                    style="
-                                        width: 95%;
-                                        font-size: large;
-                                        border-radius: 10px;
-                                        border: none;
-                                    "
-                                />
+                                    style="width: 95%; font-size: large; border-radius: 10px; border: none;" />
                                 <br />
-                                <input
-                                    onfocus="openSelectBox()"
-                                    type="url"
-                                    placeholder="바로가기 링크"
-                                    id="url"
-                                    name="url"
-                                    required
-                                    style="
-                                        width: 95%;
-                                        font-size: large;
-                                        border-radius: 10px;
-                                        border: none;
-                                    "
-                                />
+                                <input onfocus="openSelectBox()" type="url" placeholder="바로가기 링크" id="url" name="url"
+                                    required style="width: 95%; font-size: large; border-radius: 10px; border: none;" />
                             </div>
                             <div>
-                                <div
-                                    style="
+                                <div style="
                                         width: 320px;
                                         background-color: white !important;
                                         display: none;
                                         position: absolute;
                                         z-index: 999;
                                         margin-left: 20px;
-                                    "
-                                    id="selectBox"
-                                >
-                                    <div class="selector" data-value="http://www.ssodam.com/">
-                                        서담
-                                    </div>
-                                    <div
-                                        class="selector"
-                                        data-value="https://sc.sogang.ac.kr/soriindex.do"
-                                    >
-                                        청년광장
-                                    </div>
-                                    <div
-                                        class="selector"
-                                        data-value="https://www.sogang.ac.kr/bachelor/onestop/menu.html"
-                                    >
-                                        식단표
-                                    </div>
-                                    <div
-                                        class="selector"
-                                        data-value="https://library.sogang.ac.kr/"
-                                    >
-                                        도서관
-                                    </div>
+                                    " id="selectBox">
+                                    <div class="selector" data-value="http://www.ssodam.com/">서담</div>
+                                    <div class="selector" data-value="https://sc.sogang.ac.kr/soriindex.do">청년광장</div>
+                                    <div class="selector" data-value="https://www.sogang.ac.kr/bachelor/onestop/menu.html">
+                                        식단표</div>
+                                    <div class="selector" data-value="https://library.sogang.ac.kr/">도서관</div>
                                 </div>
                             </div>
                             <div style="margin-top: 20px; text-align: center;">
-                                <button
-                                    onclick="saveForm()"
-                                    class="clean-button"
-                                    style="width: 170px; height: 30px;"
-                                >
+                                <button onclick="saveForm()" class="clean-button" 
+                                    style="width: 170px; height: 30px;">
                                     저장
                                 </button>
-                                <button
-                                    onclick="removeForm()"
-                                    class="clean-button"
-                                    style="margin-left: 5px; width: 170px; height: 30px;"
-                                >
+                                <button onclick="removeForm()" class="clean-button" 
+                                    style="margin-left:5px; width: 170px; height: 30px;">
                                     삭제
                                 </button>
                             </div>
@@ -2760,4 +2224,6 @@
         1. css정리 -->
         </div>
     </body>
+
+
 </html>
